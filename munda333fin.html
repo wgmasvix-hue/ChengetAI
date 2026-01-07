@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUNDA | Your Field, Connected</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ====== VARIABLES ====== */
+        :root {
+            --primary-green: #1A5F23;
+            --field-green: #2E8B57;
+            --sun-gold: #FFB400;
+            --soil-brown: #8B4513;
+            --sky-blue: #3498DB;
+            
+            --success: #27AE60;
+            --warning: #F39C12;
+            --error: #E74C3C;
+            --info: #3498DB;
+            
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E0E0E0;
+            --gray-300: #7F8C8D;
+            --gray-400: #4A5568;
+            --gray-900: #2C3E50;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-circle: 50%;
+            
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+        }
+
+        /* ====== RESET & BASE ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--gray-900);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 120px;
+        }
+
+        /* ====== UTILITY CLASSES ====== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .items-start {
+            align-items: flex-start;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-xs { gap: var(--space-xs); }
+        .gap-sm { gap: var(--space-sm); }
+        .gap-md { gap: var(--space-md); }
+        .gap-lg { gap: var(--space-lg); }
+        .gap-xl { gap: var(--space-xl); }
+
+        .w-full { width: 100%; }
+        .w-auto { width: auto; }
+
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+
+        .hidden { display: none !important; }
+
+        /* ====== TYPOGRAPHY ====== */
+        .text-xs { font-size: 0.75rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-base { font-size: 1rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+        .text-4xl { font-size: 2.25rem; }
+
+        .font-light { font-weight: 300; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+
+        .text-primary { color: var(--primary-green); }
+        .text-success { color: var(--success); }
+        .text-warning { color: var(--warning); }
+        .text-error { color: var(--error); }
+        .text-info { color: var(--info); }
+        .text-gray-400 { color: var(--gray-400); }
+        .text-white { color: var(--white); }
+
+        /* ====== BACKGROUNDS ====== */
+        .bg-white { background: var(--white); }
+        .bg-success { background: var(--success); }
+        .bg-warning { background: var(--warning); }
+        .bg-error { background: var(--error); }
+        .bg-info { background: var(--info); }
+        .bg-primary { background: var(--primary-green); }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--field-green) 100%);
+        }
+        .bg-gradient-accent {
+            background: linear-gradient(135deg, var(--sun-gold) 0%, #FF8C00 100%);
+        }
+
+        /* ====== BORDERS & RADIUS ====== */
+        .rounded-sm { border-radius: var(--radius-sm); }
+        .rounded-md { border-radius: var(--radius-md); }
+        .rounded-lg { border-radius: var(--radius-lg); }
+        .rounded-xl { border-radius: var(--radius-xl); }
+        .rounded-full { border-radius: var(--radius-circle); }
+
+        .border { border: 1px solid var(--gray-200); }
+        .border-t { border-top: 1px solid var(--gray-200); }
+        .border-b { border-bottom: 1px solid var(--gray-200); }
+
+        /* ====== SHADOWS ====== */
+        .shadow-sm { box-shadow: var(--shadow-sm); }
+        .shadow-md { box-shadow: var(--shadow-md); }
+        .shadow-lg { box-shadow: var(--shadow-lg); }
+
+        /* ====== SPACING ====== */
+        .p-xs { padding: var(--space-xs); }
+        .p-sm { padding: var(--space-sm); }
+        .p-md { padding: var(--space-md); }
+        .p-lg { padding: var(--space-lg); }
+        .p-xl { padding: var(--space-xl); }
+
+        .px-sm { padding-left: var(--space-sm); padding-right: var(--space-sm); }
+        .px-md { padding-left: var(--space-md); padding-right: var(--space-md); }
+        .px-lg { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+
+        .py-xs { padding-top: var(--space-xs); padding-bottom: var(--space-xs); }
+        .py-sm { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+        .py-md { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+        .py-lg { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+
+        .mt-xs { margin-top: var(--space-xs); }
+        .mt-sm { margin-top: var(--space-sm); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .mt-xl { margin-top: var(--space-xl); }
+
+        .mb-xs { margin-bottom: var(--space-xs); }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+
+        /* ====== BUTTONS ====== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--field-green) 100%);
+            color: var(--white);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--sun-gold) 0%, #FF8C00 100%);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--gray-200);
+            color: var(--gray-400);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.75rem;
+        }
+
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 1rem;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: var(--radius-circle);
+        }
+
+        /* ====== BADGES ====== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge-success {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--warning);
+        }
+
+        .badge-error {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--error);
+        }
+
+        .badge-info {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--info);
+        }
+
+        .badge-primary {
+            background: rgba(26, 95, 35, 0.1);
+            color: var(--primary-green);
+        }
+
+        /* ====== CARDS ====== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-xs);
+        }
+
+        .card-subtitle {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        /* ====== HERO SECTION ====== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--field-green) 100%);
+            color: var(--white);
+            padding: var(--space-xl) 0;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="rgba(255,255,255,0.1)" d="M0,0 Q50,30 100,0 L100,100 Q50,130 0,100 Z"/></svg>');
+            background-size: 100% auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-lg);
+        }
+
+        .demo-alert {
+            background: rgba(255,255,255,0.1);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
+            border-left: 4px solid var(--sun-gold);
+        }
+
+        /* ====== ROLE SELECTOR ====== */
+        .role-selector {
+            display: flex;
+            gap: var(--space-sm);
+            margin: var(--space-2xl) 0;
+            overflow-x: auto;
+            padding-bottom: var(--space-sm);
+        }
+
+        .role-option {
+            flex: 1;
+            min-width: 150px;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .role-option:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .role-option.active {
+            border-color: var(--primary-green);
+            background: rgba(26, 95, 35, 0.05);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .role-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
+            color: var(--primary-green);
+        }
+
+        .role-option.active .role-icon {
+            color: var(--primary-green);
+        }
+
+        /* ====== COORDINATION FLOW ====== */
+        .coordination-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-2xl) 0;
+        }
+
+        .flow-node {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .flow-node:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .flow-node.supply {
+            border-color: var(--success);
+        }
+
+        .flow-node.coordination {
+            border-color: var(--info);
+        }
+
+        .flow-node.demand {
+            border-color: var(--warning);
+        }
+
+        .node-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .node-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-circle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.25rem;
+        }
+
+        .node-icon.supply {
+            background: var(--success);
+        }
+
+        .node-icon.coordination {
+            background: var(--info);
+        }
+
+        .node-icon.demand {
+            background: var(--warning);
+        }
+
+        .node-status {
+            margin-left: auto;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .node-status.active {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success);
+        }
+
+        .node-status.warning {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--warning);
+        }
+
+        .node-status.error {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--error);
+        }
+
+        .node-content {
+            margin-bottom: var(--space-md);
+        }
+
+        .supply-item, .demand-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-xs);
+        }
+
+        .node-message {
+            background: var(--gray-100);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-md);
+            font-size: 0.875rem;
+            border-left: 4px solid;
+        }
+
+        .node-message.success {
+            border-color: var(--success);
+        }
+
+        .node-message.warning {
+            border-color: var(--warning);
+        }
+
+        .node-message.info {
+            border-color: var(--info);
+        }
+
+        /* ====== LIVE STREAM ====== */
+        .live-stream {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            margin: var(--space-2xl) 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .stream-header {
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .stream-items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .stream-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            border-radius: var(--radius-sm);
+            background: var(--gray-100);
+            animation: slideInRight 0.3s ease;
+        }
+
+        .stream-item.match {
+            border-left: 4px solid var(--success);
+        }
+
+        .stream-item.supply {
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .stream-item.demand {
+            border-left: 4px solid var(--info);
+        }
+
+        .stream-item.alert {
+            border-left: 4px solid var(--warning);
+        }
+
+        .stream-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gray-200);
+            border-radius: var(--radius-circle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+        }
+
+        .stream-content {
+            flex: 1;
+        }
+
+        .stream-time {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        /* ====== METRICS ====== */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-xl) 0;
+        }
+
+        .metric-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--sky-blue);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        /* ====== COMPARISON ====== */
+        .comparison-section {
+            margin: var(--space-2xl) 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .comparison-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid;
+        }
+
+        .comparison-card.disconnected {
+            border-color: var(--error);
+        }
+
+        .comparison-card.coordinated {
+            border-color: var(--success);
+        }
+
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .timeline-marker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+        }
+
+        .timeline-item.failure .timeline-marker {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--error);
+        }
+
+        .timeline-item.success .timeline-marker {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success);
+        }
+
+        /* ====== NOTIFICATIONS ====== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 300px;
+            max-width: 400px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.5s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-circle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.125rem;
+        }
+
+        .notification.success .notification-icon {
+            background: var(--success);
+        }
+
+        .notification.warning .notification-icon {
+            background: var(--warning);
+        }
+
+        .notification.error .notification-icon {
+            background: var(--error);
+        }
+
+        .notification.info .notification-icon {
+            background: var(--info);
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 2px;
+        }
+
+        .notification-message {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        .notification-close {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-circle);
+            color: var(--gray-400);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notification-close:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        /* ====== DEMO CONTROLS ====== */
+        .demo-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: var(--space-md);
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+            z-index: 900;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ====== ANIMATIONS ====== */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .blinking {
+            animation: blink 1s infinite;
+        }
+
+        .pulsing {
+            animation: pulse 2s infinite;
+        }
+
+        /* ====== FOOTER ====== */
+        .footer {
+            text-align: center;
+            padding: var(--space-lg);
+            color: var(--gray-400);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--gray-200);
+            margin-top: var(--space-2xl);
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 1200px) {
+            .coordination-flow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .role-selector {
+                flex-direction: column;
+            }
+            
+            .control-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .coordination-flow {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--space-sm);
+            }
+            
+            .card {
+                padding: var(--space-md);
+            }
+            
+            .notification {
+                left: 20px;
+                right: 20px;
+                min-width: auto;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ====== PRINT STYLES ====== */
+        @media print {
+            .demo-controls,
+            .btn,
+            .notification {
+                display: none !important;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: 1px solid var(--gray-200);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div>
+                    <div class="logo-text">MUNDA</div>
+                    <div class="tagline">Your Field, Connected</div>
+                </div>
+            </div>
+            
+            <h1 class="text-3xl font-bold">Real-Time Agricultural Coordination</h1>
+            <p class="text-lg mt-sm">Connecting Zimbabwe's farmers, buyers, and transporters to prevent food loss</p>
+            
+            <div class="demo-alert mt-lg">
+                <p><i class="fas fa-play-circle"></i> <strong>Interactive Demo Active</strong> - Experience how MUNDA coordinates the entire food supply chain in real-time</p>
+            </div>
+            
+            <div class="flex items-center justify-between mt-lg">
+                <div class="flex items-center gap-md">
+                    <div class="bg-white/20 rounded-md p-sm">
+                        <i class="fas fa-clock"></i>
+                        <span id="currentTime" class="ml-sm">09:00 AM</span>
+                    </div>
+                    <div class="text-sm">
+                        <span id="currentDate">Mar 15, 2024</span>
+                        <span class="ml-sm">📍 Harare, Zimbabwe</span>
+                    </div>
+                </div>
+                <div class="flex gap-sm">
+                    <button class="btn btn-outline btn-sm" onclick="exportData()">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                    <button class="btn btn-accent btn-sm" onclick="startFullDemo()">
+                        <i class="fas fa-play"></i> Full Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Role Selector -->
+        <div class="role-selector">
+            <div class="role-option active" onclick="switchRole('farmer')">
+                <div class="role-icon">
+                    <i class="fas fa-tractor"></i>
+                </div>
+                <h3 class="font-semibold">Farmer</h3>
+                <p class="text-sm text-gray-400">Sell your harvest</p>
+            </div>
+            
+            <div class="role-option" onclick="switchRole('buyer')">
+                <div class="role-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3 class="font-semibold">Buyer</h3>
+                <p class="text-sm text-gray-400">Source quality produce</p>
+            </div>
+            
+            <div class="role-option" onclick="switchRole('transporter')">
+                <div class="role-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3 class="font-semibold">Transporter</h3>
+                <p class="text-sm text-gray-400">Optimize your routes</p>
+            </div>
+            
+            <div class="role-option" onclick="switchRole('coordinator')">
+                <div class="role-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3 class="font-semibold">Coordinator</h3>
+                <p class="text-sm text-gray-400">System overview</p>
+            </div>
+        </div>
+
+        <!-- Coordination Dashboard -->
+        <div class="mb-2xl">
+            <h2 class="text-2xl font-bold mb-lg">Live Coordination Dashboard</h2>
+            <div class="coordination-flow">
+                <!-- Farmer Node -->
+                <div class="flow-node supply">
+                    <div class="node-header">
+                        <div class="node-icon supply">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Farmer Supply</h3>
+                            <p class="text-sm text-gray-400" id="farmerLocation">Domboshava Farm</p>
+                        </div>
+                        <span class="node-status active" id="farmerStatus">ACTIVE</span>
+                    </div>
+                    
+                    <div class="node-content">
+                        <div class="supply-item">
+                            <div>
+                                <div class="font-medium">🌽 Maize</div>
+                                <div class="text-xs text-gray-400">Grade B, 5 days left</div>
+                            </div>
+                            <div class="font-bold text-success" id="maizeSupply">5 bags</div>
+                        </div>
+                        <div class="supply-item">
+                            <div>
+                                <div class="font-medium">🍅 Tomatoes</div>
+                                <div class="text-xs text-gray-400">Grade A, 3 days left</div>
+                            </div>
+                            <div class="font-bold text-success" id="tomatoSupply">3 crates</div>
+                        </div>
+                    </div>
+                    
+                    <div class="node-message info" id="farmerMessage">
+                        <i class="fas fa-comment-alt"></i> 
+                        <span class="ml-sm">Ready for market. Awaiting optimal buyer.</span>
+                    </div>
+                </div>
+
+                <!-- MUNDA Coordination Hub -->
+                <div class="flow-node coordination">
+                    <div class="node-header">
+                        <div class="node-icon coordination">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">MUNDA Engine</h3>
+                            <p class="text-sm text-gray-400">Real-time matching</p>
+                        </div>
+                        <span class="node-status active">LIVE</span>
+                    </div>
+                    
+                    <div class="node-content">
+                        <div class="flex gap-md">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary" id="matchesToday">12</div>
+                                <div class="text-sm text-gray-400">Matches Today</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary" id="foodSaved">845</div>
+                                <div class="text-sm text-gray-400">kg Saved</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary" id="responseTime">2.3</div>
+                                <div class="text-sm text-gray-400">Avg Response (min)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="node-message success">
+                        <i class="fas fa-bolt"></i> 
+                        <span class="ml-sm">Monitoring 142 farms, 8 active alerts</span>
+                    </div>
+                </div>
+
+                <!-- Market Node -->
+                <div class="flow-node demand">
+                    <div class="node-header">
+                        <div class="node-icon demand">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Markets & Buyers</h3>
+                            <p class="text-sm text-gray-400">Demand signals</p>
+                        </div>
+                        <span class="node-status warning" id="marketStatus">OVERCAPACITY</span>
+                    </div>
+                    
+                    <div class="node-content">
+                        <div class="demand-item">
+                            <div>
+                                <div class="font-medium">Mbare Market</div>
+                                <div class="text-xs text-gray-400">500kg oversupply</div>
+                            </div>
+                            <div class="font-bold text-warning">-40%</div>
+                        </div>
+                        <div class="demand-item">
+                            <div>
+                                <div class="font-medium">Chitungwiza Hub</div>
+                                <div class="text-xs text-gray-400">Puree capacity</div>
+                            </div>
+                            <div class="font-bold text-success">200 kg</div>
+                        </div>
+                    </div>
+                    
+                    <div class="node-message warning">
+                        <i class="fas fa-exclamation-triangle"></i> 
+                        <span class="ml-sm">Prices dropping, divert shipments!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Stream -->
+        <div class="live-stream">
+            <div class="stream-header">
+                <h3 class="card-title"><i class="fas fa-stream"></i> Live Coordination Stream</h3>
+                <p class="card-subtitle">Real-time updates from the MUNDA network</p>
+            </div>
+            
+            <div class="stream-items" id="coordinationStream">
+                <!-- Stream items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" id="totalFarms">142</div>
+                <div class="metric-label">Active Farms</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="matchRate">87%</div>
+                <div class="metric-label">Match Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="foodWasteSaved">2.4T</div>
+                <div class="metric-label">Food Waste Saved</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="avgPricePremium">+18%</div>
+                <div class="metric-label">Avg Price Premium</div>
+            </div>
+        </div>
+
+        <!-- Before & After Comparison -->
+        <div class="comparison-section">
+            <h2 class="text-2xl font-bold mb-lg">The MUNDA Difference</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card disconnected">
+                    <div class="comparison-header">
+                        <h3 class="card-title">Traditional System</h3>
+                        <span class="badge badge-error">Disconnected</span>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item failure">
+                            <div class="timeline-marker">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Harvest Ready</div>
+                                <div class="text-sm text-gray-400">No buyer information</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item failure">
+                            <div class="timeline-marker">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Market Search</div>
+                                <div class="text-sm text-gray-400">Manual calls & visits</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item failure">
+                            <div class="timeline-marker">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Transport Coordination</div>
+                                <div class="text-sm text-gray-400">Unreliable & expensive</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item failure">
+                            <div class="timeline-marker">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Result</div>
+                                <div class="text-sm text-gray-400">40% food loss, low prices</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card coordinated">
+                    <div class="comparison-header">
+                        <h3 class="card-title">MUNDA Coordinated</h3>
+                        <span class="badge badge-success">Optimized</span>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item success">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Smart Alerts</div>
+                                <div class="text-sm text-gray-400">Buyers notified automatically</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item success">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Real-time Matching</div>
+                                <div class="text-sm text-gray-400">Optimal matches in seconds</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item success">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Route Optimization</div>
+                                <div class="text-sm text-gray-400">Efficient transport routing</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item success">
+                            <div class="timeline-marker">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Result</div>
+                                <div class="text-sm text-gray-400">85% less waste, better prices</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>MUNDA Agricultural Coordination Platform | Zimbabwe Food Security Initiative</p>
+            <p class="mt-sm text-sm">This is a demonstration interface showing real-time coordination capabilities</p>
+        </div>
+    </div>
+
+    <!-- Demo Controls -->
+    <div class="demo-controls">
+        <div class="container">
+            <h3 class="text-lg font-semibold mb-sm">Interactive Demo Controls</h3>
+            <div class="control-buttons">
+                <button class="btn btn-primary btn-sm" onclick="simulateHarvest()">
+                    <i class="fas fa-tractor"></i> Simulate Harvest
+                </button>
+                <button class="btn btn-warning btn-sm" onclick="simulatePriceDrop()">
+                    <i class="fas fa-chart-line"></i> Price Drop Alert
+                </button>
+                <button class="btn btn-success btn-sm" onclick="simulateMatch()">
+                    <i class="fas fa-handshake"></i> Create Match
+                </button>
+                <button class="btn btn-error btn-sm" onclick="simulateWeatherAlert()">
+                    <i class="fas fa-cloud-showers-heavy"></i> Weather Alert
+                </button>
+                <button class="btn btn-info btn-sm" onclick="simulateTransportOptimization()">
+                    <i class="fas fa-route"></i> Optimize Transport
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="resetDemo()">
+                    <i class="fas fa-redo"></i> Reset Demo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the coordination stream
+        const coordinationStream = document.getElementById('coordinationStream');
+
+        // Sample data for the demo
+        const demoData = {
+            time: '09:00 AM',
+            date: 'Mar 15, 2024',
+            
+            farmer: {
+                location: 'Domboshava Farm',
+                status: 'ACTIVE',
+                maizeSupply: 5,
+                tomatoSupply: 3,
+                message: 'Ready for market. Awaiting optimal buyer.'
+            },
+            
+            market: {
+                status: 'OVERCAPACITY',
+                demand: [
+                    {name: 'Mbare Market', details: '500kg oversupply', trend: -40},
+                    {name: 'Chitungwiza Hub', details: 'Puree capacity', capacity: 200}
+                ]
+            },
+            
+            metrics: {
+                matchesToday: 12,
+                foodSaved: 845,
+                responseTime: 2.3,
+                totalFarms: 142,
+                matchRate: '87%',
+                foodWasteSaved: '2.4T',
+                avgPricePremium: '+18%'
+            },
+            
+            streamItems: [
+                {
+                    id: 1,
+                    type: 'match',
+                    icon: 'fas fa-handshake',
+                    title: 'Match Made!',
+                    message: 'Domboshava Farm connected with Harare Fresh Market',
+                    time: '08:45 AM'
+                },
+                {
+                    id: 2,
+                    type: 'supply',
+                    icon: 'fas fa-seedling',
+                    title: 'New Supply Posted',
+                    message: 'Mashonaland East: 50kg tomatoes available (3 days shelf life)',
+                    time: '08:30 AM'
+                },
+                {
+                    id: 3,
+                    type: 'demand',
+                    icon: 'fas fa-shopping-cart',
+                    title: 'Demand Alert',
+                    message: 'Chitungwiza processing plant needs 200kg tomatoes for puree',
+                    time: '08:15 AM'
+                },
+                {
+                    id: 4,
+                    type: 'alert',
+                    icon: 'fas fa-exclamation-triangle',
+                    title: 'Weather Warning',
+                    message: 'Heavy rains expected in Mash West - harvest immediately',
+                    time: '08:00 AM'
+                },
+                {
+                    id: 5,
+                    type: 'supply',
+                    icon: 'fas fa-tractor',
+                    title: 'Harvest Completed',
+                    message: 'Goromonzi Farm: 100kg cabbage ready for market',
+                    time: '07:45 AM'
+                }
+            ]
+        };
+
+        // Save initial state for reset
+        const initialState = JSON.parse(JSON.stringify(demoData));
+
+        // Function to update the display
+        function updateDisplay() {
+            // Update farmer information
+            document.getElementById('farmerLocation').textContent = demoData.farmer.location;
+            document.getElementById('farmerStatus').textContent = demoData.farmer.status;
+            document.getElementById('maizeSupply').textContent = `${demoData.farmer.maizeSupply} bags`;
+            document.getElementById('tomatoSupply').textContent = `${demoData.farmer.tomatoSupply} crates`;
+            document.getElementById('farmerMessage').innerHTML = `<i class="fas fa-comment-alt"></i> <span class="ml-sm">${demoData.farmer.message}</span>`;
+            
+            // Update market information
+            document.getElementById('marketStatus').textContent = demoData.market.status;
+            
+            // Update metrics
+            document.getElementById('matchesToday').textContent = demoData.metrics.matchesToday;
+            document.getElementById('foodSaved').textContent = demoData.metrics.foodSaved;
+            document.getElementById('responseTime').textContent = demoData.metrics.responseTime;
+            document.getElementById('totalFarms').textContent = demoData.metrics.totalFarms;
+            document.getElementById('matchRate').textContent = demoData.metrics.matchRate;
+            document.getElementById('foodWasteSaved').textContent = demoData.metrics.foodWasteSaved;
+            document.getElementById('avgPricePremium').textContent = demoData.metrics.avgPricePremium;
+            
+            // Update time
+            document.getElementById('currentTime').textContent = demoData.time;
+            document.getElementById('currentDate').textContent = demoData.date;
+            
+            // Update stream
+            coordinationStream.innerHTML = '';
+            demoData.streamItems.forEach(item => {
+                const streamItem = document.createElement('div');
+                streamItem.className = `stream-item ${item.type}`;
+                streamItem.innerHTML = `
+                    <div class="stream-icon">
+                        <i class="${item.icon}"></i>
+                    </div>
+                    <div class="stream-content">
+                        <div class="font-medium">${item.title}</div>
+                        <div class="text-sm">${item.message}</div>
+                        <div class="stream-time">${item.time}</div>
+                    </div>
+                `;
+                coordinationStream.appendChild(streamItem);
+            });
+        }
+
+        // Function to switch roles
+        function switchRole(role) {
+            // Update active role
+            document.querySelectorAll('.role-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // Update farmer message based on role
+            switch(role) {
+                case 'farmer':
+                    demoData.farmer.message = 'Ready for market. Awaiting optimal buyer.';
+                    showNotification('Role Switched', 'Now viewing as Farmer', 'success');
+                    break;
+                case 'buyer':
+                    demoData.farmer.message = 'Analyzing market prices... 3 buyers nearby';
+                    showNotification('Role Switched', 'Now viewing as Buyer', 'info');
+                    break;
+                case 'transporter':
+                    demoData.farmer.message = '2 transport options available, 45 mins avg';
+                    showNotification('Role Switched', 'Now viewing as Transporter', 'warning');
+                    break;
+                case 'coordinator':
+                    demoData.farmer.message = 'System overview: 142 farms active, 87% match rate';
+                    showNotification('Role Switched', 'Now viewing as Coordinator', 'success');
+                    break;
+            }
+            
+            updateDisplay();
+        }
+
+        // Notification system
+        function showNotification(title, message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-icon">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                </div>
+                <div class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+        // Demo scenario functions
+        function simulateHarvest() {
+            demoData.farmer.maizeSupply += 2;
+            demoData.farmer.tomatoSupply += 1;
+            demoData.metrics.matchesToday += 1;
+            demoData.metrics.foodSaved += 120;
+            demoData.metrics.totalFarms += 1;
+            
+            // Update time
+            demoData.time = '09:15 AM';
+            
+            // Add to stream
+            demoData.streamItems.unshift({
+                id: Date.now(),
+                type: 'supply',
+                icon: 'fas fa-tractor',
+                title: 'Harvest Complete',
+                message: 'Domboshava Farm harvested 2 bags maize, 1 crate tomatoes',
+                time: demoData.time
+            });
+            
+            // Limit stream items
+            if (demoData.streamItems.length > 10) {
+                demoData.streamItems.pop();
+            }
+            
+            updateDisplay();
+            showNotification('Harvest Simulated', 'Added 2 bags maize and 1 crate tomatoes to supply', 'success');
+        }
+
+        function simulatePriceDrop() {
+            demoData.market.status = 'CRITICAL';
+            demoData.metrics.responseTime = 1.8;
+            
+            // Update time
+            demoData.time = '09:20 AM';
+            
+            // Update demand items
+            demoData.market.demand[0].trend = -60;
+            
+            // Add to stream
+            demoData.streamItems.unshift({
+                id: Date.now(),
+                type: 'alert',
+                icon: 'fas fa-chart-line',
+                title: 'Price Alert',
+                message: 'Tomato prices dropped 60% at Mbare Market',
+                time: demoData.time
+            });
+            
+            // Limit stream items
+            if (demoData.streamItems.length > 10) {
+                demoData.streamItems.pop();
+            }
+            
+            updateDisplay();
+            showNotification('Market Alert', 'Tomato prices dropped significantly', 'warning');
+        }
+
+        function simulateMatch() {
+            if (demoData.farmer.maizeSupply >= 3 && demoData.farmer.tomatoSupply >= 2) {
+                demoData.farmer.maizeSupply -= 3;
+                demoData.farmer.tomatoSupply -= 2;
+                demoData.metrics.matchesToday += 1;
+                demoData.metrics.foodSaved += 340;
+                demoData.metrics.matchRate = '88%';
+                
+                // Update time
+                demoData.time = '09:25 AM';
+                
+                // Add to stream
+                demoData.streamItems.unshift({
+                    id: Date.now(),
+                    type: 'match',
+                    icon: 'fas fa-bolt',
+                    title: 'Perfect Match!',
+                    message: '5 units matched with Chitungwiza Puree Plant. Transportation en route.',
+                    time: demoData.time
+                });
+                
+                // Limit stream items
+                if (demoData.streamItems.length > 10) {
+                    demoData.streamItems.pop();
+                }
+                
+                updateDisplay();
+                showNotification('Match Made!', 'Connected farm with processing plant', 'success');
+            } else {
+                showNotification('Insufficient Supply', 'Not enough produce to create match', 'error');
+            }
+        }
+
+        function simulateWeatherAlert() {
+            demoData.farmer.message = 'URGENT: Harvest immediately. Storms expected in 2 hours.';
+            demoData.farmer.status = 'URGENT';
+            
+            // Update time
+            demoData.time = '09:30 AM';
+            
+            // Add to stream
+            demoData.streamItems.unshift({
+                id: Date.now(),
+                type: 'alert',
+                icon: 'fas fa-cloud-showers-heavy',
+                title: 'Weather Emergency',
+                message: 'Severe storms expected in Mashonaland East in 2 hours',
+                time: demoData.time
+            });
+            
+            // Limit stream items
+            if (demoData.streamItems.length > 10) {
+                demoData.streamItems.pop();
+            }
+            
+            updateDisplay();
+            showNotification('Weather Alert', 'Immediate action required', 'error');
+        }
+
+        function simulateTransportOptimization() {
+            demoData.metrics.responseTime = 1.5;
+            
+            // Update time
+            demoData.time = '09:35 AM';
+            
+            // Add to stream
+            demoData.streamItems.unshift({
+                id: Date.now(),
+                type: 'demand',
+                icon: 'fas fa-route',
+                title: 'Route Optimized',
+                message: 'Transport time reduced by 35% through smart routing',
+                time: demoData.time
+            });
+            
+            // Limit stream items
+            if (demoData.streamItems.length > 10) {
+                demoData.streamItems.pop();
+            }
+            
+            updateDisplay();
+            showNotification('Route Optimized', 'Transport efficiency improved by 35%', 'info');
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(demoData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `munda-data-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showNotification('Data Exported', 'Demo data downloaded as JSON', 'success');
+        }
+
+        function resetDemo() {
+            // Restore initial state
+            Object.assign(demoData, JSON.parse(JSON.stringify(initialState)));
+            
+            // Reset role selector
+            document.querySelectorAll('.role-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelectorAll('.role-option')[0].classList.add('active');
+            
+            updateDisplay();
+            showNotification('Demo Reset', 'All data restored to initial state', 'info');
+        }
+
+        function startFullDemo() {
+            showNotification('Demo Started', 'Running full scenario sequence...', 'info');
+            
+            // Sequence of events for the demo
+            setTimeout(simulateHarvest, 1000);
+            setTimeout(simulatePriceDrop, 3000);
+            setTimeout(simulateMatch, 5000);
+            setTimeout(simulateWeatherAlert, 7000);
+            setTimeout(simulateTransportOptimization, 9000);
+            
+            // Final message
+            setTimeout(() => {
+                showNotification('Demo Complete', 'All scenarios demonstrated successfully', 'success');
+            }, 11000);
+        }
+
+        // Initialize the display
+        updateDisplay();
+
+        // Add initial notifications
+        setTimeout(() => {
+            showNotification('Welcome to MUNDA', 'Real-time agricultural coordination system loaded', 'info');
+        }, 1000);
+
+        setTimeout(() => {
+            showNotification('System Active', 'Monitoring 142 farms and 68 markets', 'success');
+        }, 2000);
+
+        // Auto-update time every minute
+        setInterval(() => {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const dateString = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+            
+            demoData.time = timeString;
+            demoData.date = dateString;
+            updateDisplay();
+        }, 60000);
+    </script>
+</body>
+</html>
