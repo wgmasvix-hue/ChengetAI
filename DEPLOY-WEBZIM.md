@@ -44,7 +44,12 @@ The site works on both HTTP and HTTPS with no changes.
 - **Friendly URLs:** `.htaccess` maps `/pricing` → `/pricing.html`, adds caching,
   compression and security headers, and serves a branded `404.html`.
 - **Deploy page API:** `deploy.html` talks to the live API at
-  `https://api.chengetailabs.co.zw/api` (JWT sign-in, real deployment jobs).
+  `https://api.chengetailabs.co.zw/api` (real deployment jobs). Deployments are
+  gated behind a **dedicated deployment key** issued by ChengetAi Labs: the page
+  exchanges the key for a JWT at `POST /auth/login` (payload `{apiKey, key}`), or
+  — if the backend accepts keys directly — sends the key itself as the
+  `Authorization: Bearer` credential. Visitors without a key are pointed to the
+  contact form ("Deployment key request").
   Make sure the backend's Nginx CORS configuration allows the site origins
   `https://www.chengetailabs.co.zw` and `https://chengetailabs.co.zw`
   (headers `Access-Control-Allow-Origin`, `Access-Control-Allow-Headers:

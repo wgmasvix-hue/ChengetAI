@@ -50,19 +50,38 @@
 
   /* ---------- 3. Auth ---------- */
 
+  /* Access is gated by a dedicated deployment key issued by ChengetAi Labs.
+     The key is exchanged at the login endpoint for a JWT; if the backend
+     accepts keys directly, the key itself is used as the bearer credential. */
+
+  var KEY_KEY = "chengetai_deploy_key";
+
   function getToken() { return localStorage.getItem(TOKEN_KEY); }
   function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
-  function clearToken() { localStorage.removeItem(TOKEN_KEY); }
+  function getKey() { return localStorage.getItem(KEY_KEY); }
+  function setKey(k) { localStorage.setItem(KEY_KEY, k); }
+  function clearCredentials() {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(KEY_KEY);
+  }
+
+  // The bearer credential: a JWT from key exchange, or the raw key itself.
+  function getCredential() { return getToken() || getKey(); }
 
   // Proactively treat an expired JWT as absent (exp claim, if present).
-  function tokenIsValid() {
+  function credentialIsValid() {
     var t = getToken();
-    if (!t) return false;
-    try {
-      var payload = JSON.parse(atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
-      if (payload.exp && payload.exp * 1000 < Date.now() + 30000) { clearToken(); return false; }
-    } catch (e) { /* opaque token — let the server judge it */ }
-    return true;
+    if (t) {
+      try {
+        var payload = JSON.parse(atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
+        if (payload.exp && payload.exp * 1000 < Date.now() + 30000) {
+          localStorage.removeItem(TOKEN_KEY);
+          return !!getKey(); // JWT expired — re-exchange happens via the key panel
+        }
+      } catch (e) { /* opaque token — let the server judge it */ }
+      return true;
+    }
+    return !!getKey();
   }
 
   function extractToken(data) {
@@ -71,16 +90,40 @@
       (data.data && extractToken(data.data)) || (data.user && data.user.token) || null;
   }
 
-  async function login(email, password) {
-    var data = await apiRequest(ROUTES.login, {
-      method: "POST",
-      body: { email: email, password: password },
-      auth: false
-    });
-    var token = extractToken(data);
-    if (!token) throw new ApiError("Login succeeded but no token was returned by the API.");
-    setToken(token);
-    return token;
+  /* Activate a dedicated deployment key.
+     1) Try exchanging it for a JWT at the login endpoint.
+     2) If the endpoint doesn't support key exchange, use the key directly
+        as the bearer credential and validate it with an authenticated call. */
+  async function activateKey(key) {
+    key = key.trim();
+    if (!key) throw ApiError("Enter your deployment key.");
+    try {
+      var data = await apiRequest(ROUTES.login, {
+        method: "POST",
+        body: { apiKey: key, key: key },
+        auth: false
+      });
+      var token = extractToken(data);
+      if (token) { setToken(token); setKey(key); return; }
+    } catch (e) {
+      if (e instanceof ApiError && (e.status === 401 || e.status === 403)) {
+        throw ApiError("This deployment key was not accepted. Check the key or contact ChengetAi Labs.", e.status);
+      }
+      if (e instanceof ApiError && e.status === 0) throw e; // network failure
+      /* 400/404/405/422 → endpoint doesn't do key exchange; fall through */
+    }
+    // Direct-key mode: validate the key against an authenticated endpoint.
+    setKey(key);
+    try {
+      await apiRequest(ROUTES.servers);
+    } catch (e) {
+      if (e instanceof ApiError && (e.status === 401 || e.status === 403)) {
+        clearCredentials();
+        throw ApiError("This deployment key was not accepted. Check the key or contact ChengetAi Labs.", e.status);
+      }
+      if (e instanceof ApiError && e.status === 0) { clearCredentials(); throw e; }
+      /* endpoint missing (404 etc.) — accept the key; the deploy call will judge it */
+    }
   }
 
   /* Inline login panel — shown whenever a request needs (re)authentication.
@@ -94,14 +137,14 @@
     panel.className = "card";
     panel.style.cssText = "margin-bottom:16px; cursor:default;";
     panel.innerHTML =
-      '<h3 style="margin-top:0;">Sign in to deploy</h3>' +
-      '<p style="font-size:0.87rem;">Use your ChengetAi Cloud account to authenticate with the Deploy API.</p>' +
+      '<h3 style="margin-top:0;">Deployment key required</h3>' +
+      '<p style="font-size:0.87rem;">Deployments require a dedicated key issued by ChengetAi Labs. ' +
+      'Don’t have one? <a href="contact.html" style="color:var(--green);">Request a deployment key →</a></p>' +
       '<form class="form-grid" style="margin-top:14px;">' +
-      '  <div class="field"><label for="dl-email">Email</label>' +
-      '    <input id="dl-email" type="email" autocomplete="username" required></div>' +
-      '  <div class="field"><label for="dl-pass">Password</label>' +
-      '    <input id="dl-pass" type="password" autocomplete="current-password" required></div>' +
-      '  <button type="submit" class="btn btn-primary">Sign In</button>' +
+      '  <div class="field"><label for="dl-key">Deployment Key</label>' +
+      '    <input id="dl-key" type="password" autocomplete="off" spellcheck="false" ' +
+      '      placeholder="e.g. CHG-XXXX-XXXX-XXXX" required></div>' +
+      '  <button type="submit" class="btn btn-primary">Activate Key</button>' +
       '  <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem;"></p>' +
       "</form>";
     consoleEl.parentNode.insertBefore(panel, consoleEl);
@@ -112,19 +155,18 @@
       var btn = panel.querySelector("button");
       errEl.style.display = "none";
       btn.disabled = true;
-      btn.textContent = "Signing in…";
+      btn.textContent = "Verifying key…";
       try {
-        await login(panel.querySelector("#dl-email").value.trim(),
-                    panel.querySelector("#dl-pass").value);
+        await activateKey(panel.querySelector("#dl-key").value);
         hideLogin();
         loadServers();
         if (pendingLogin) { var r = pendingLogin; pendingLogin = null; r(); }
       } catch (err) {
-        errEl.textContent = err instanceof ApiError ? err.message : "Sign-in failed. Please try again.";
+        errEl.textContent = err instanceof ApiError ? err.message : "Key activation failed. Please try again.";
         errEl.style.display = "block";
       } finally {
         btn.disabled = false;
-        btn.textContent = "Sign In";
+        btn.textContent = "Activate Key";
       }
     });
     return panel;
@@ -134,15 +176,21 @@
     if (!loginPanel) loginPanel = buildLoginPanel();
     loginPanel.hidden = false;
     loginPanel.scrollIntoView({ behavior: "smooth", block: "center" });
-    loginPanel.querySelector("#dl-email").focus();
+    loginPanel.querySelector("#dl-key").focus();
   }
 
   function hideLogin() { if (loginPanel) loginPanel.hidden = true; }
 
-  // Resolves once a valid token exists — reuses a stored token, otherwise
-  // routes the user through the login panel.
-  function ensureAuth() {
-    if (tokenIsValid()) return Promise.resolve();
+  // Resolves once a usable credential exists. Reuses a valid JWT; silently
+  // re-exchanges the stored deployment key when the JWT has expired; only
+  // prompts when there is no key or the key is rejected.
+  async function ensureAuth() {
+    if (getToken() && credentialIsValid()) return;
+    var key = getKey();
+    if (key) {
+      try { await activateKey(key); return; }
+      catch (e) { clearCredentials(); }
+    }
     return new Promise(function (resolve) {
       pendingLogin = resolve;
       showLogin();
@@ -163,8 +211,10 @@
     opts = opts || {};
     var headers = { "Content-Type": "application/json" };
     if (opts.auth !== false) {
-      var token = getToken();
-      if (token) headers.Authorization = "Bearer " + token;
+      // The credential (JWT or raw deployment key) always travels as the
+      // bearer token — custom headers would trigger stricter CORS preflights.
+      var cred = getCredential();
+      if (cred) headers.Authorization = "Bearer " + cred;
     }
 
     var res;
@@ -182,7 +232,9 @@
     try { data = await res.json(); } catch (e) { /* non-JSON body */ }
 
     if (res.status === 401 || res.status === 403) {
-      clearToken();
+      // Drop only the JWT — ensureAuth will silently re-exchange the stored
+      // key, and clears it too if the key itself has been revoked.
+      localStorage.removeItem(TOKEN_KEY);
       var authMsg = (data && (data.message || data.error)) ||
         (res.status === 401
           ? "Authentication failed — please sign in again."
@@ -331,7 +383,7 @@
 
   // Like withAuth but never prompts — used for optional startup calls.
   async function withAuthSilent(action) {
-    if (!tokenIsValid()) throw ApiError("Not signed in", 401);
+    if (!credentialIsValid()) throw ApiError("No deployment key", 401);
     return action();
   }
 
@@ -402,11 +454,11 @@
 
   (async function init() {
     await discoverRoutes();
-    if (tokenIsValid()) {
-      consoleUI.line("Signed in — select a platform and press Deploy.", "dim");
+    if (credentialIsValid()) {
+      consoleUI.line("Deployment key active — select a platform and press Deploy.", "dim");
       loadServers();
     } else {
-      consoleUI.line("Awaiting deployment… you'll be asked to sign in when you press Deploy.", "dim");
+      consoleUI.line("Awaiting deployment… a dedicated deployment key is required to deploy.", "dim");
     }
   })();
 })();
