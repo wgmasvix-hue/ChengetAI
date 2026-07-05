@@ -64,6 +64,25 @@
     });
   });
 
+  /* Contact form prefill from query params (used by server rental buttons:
+     contact.html?enquiry=server&plan=Cloud+VPS+M) */
+  var topicSelect = document.getElementById("ct-topic");
+  var msgField = document.getElementById("ct-msg");
+  if (topicSelect && window.location.search) {
+    var params = new URLSearchParams(window.location.search);
+    var enquiry = params.get("enquiry");
+    var plan = params.get("plan");
+    if (enquiry === "server") {
+      for (var i = 0; i < topicSelect.options.length; i++) {
+        if (topicSelect.options[i].text === "Server rental order") { topicSelect.selectedIndex = i; break; }
+      }
+      if (plan && msgField && !msgField.value) {
+        msgField.value = "I would like to rent a cloud server — plan: " + plan + ".\n" +
+          "Preferred region: \nOperating system: \nManaged or root access: \nBilling: monthly / annual";
+      }
+    }
+  }
+
   /* Footer year */
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
