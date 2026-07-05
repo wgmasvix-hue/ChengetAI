@@ -88,6 +88,56 @@
   </div>
 </section>
 
+<!-- CHENGETAI CLI -->
+<section class="section section-alt" id="cli">
+  <div class="container split" style="align-items:start;">
+    <div class="reveal">
+      <span class="eyebrow">ChengetAi CLI</span>
+      <h2>Install the ChengetAi CLI</h2>
+      <p class="lead" style="margin-top:16px;">Drive ChengetAi Cloud and Deploy from your terminal — provision servers, run deployments and stream logs without leaving the shell.</p>
+
+      <p style="margin-top:26px; font-weight:600; font-size:0.9rem;">Linux / macOS</p>
+      <div class="cmd">
+        <code>curl -fsSL https://get.chengetailabs.co.zw | bash</code>
+        <button type="button" class="btn btn-ghost btn-sm copy-btn" data-copy="curl -fsSL https://get.chengetailabs.co.zw | bash">Copy</button>
+      </div>
+
+      <p style="margin-top:18px; font-weight:600; font-size:0.9rem;">Or via npm (any platform with Node.js 18+)</p>
+      <div class="cmd">
+        <code>npm install -g @chengetai/cli</code>
+        <button type="button" class="btn btn-ghost btn-sm copy-btn" data-copy="npm install -g @chengetai/cli">Copy</button>
+      </div>
+
+      <p style="margin-top:18px; font-weight:600; font-size:0.9rem;">Windows (PowerShell)</p>
+      <div class="cmd">
+        <code>iwr https://get.chengetailabs.co.zw/install.ps1 -useb | iex</code>
+        <button type="button" class="btn btn-ghost btn-sm copy-btn" data-copy="iwr https://get.chengetailabs.co.zw/install.ps1 -useb | iex">Copy</button>
+      </div>
+
+      <p style="margin-top:18px; font-size:0.85rem; color:var(--text-dim);">The CLI authenticates with your <a href="contact.html?enquiry=server#demo" style="color:var(--green);">dedicated deployment key</a> and talks to the same API as the web portal.</p>
+    </div>
+    <div class="reveal">
+      <h3 style="margin-bottom:14px;">Quickstart</h3>
+      <div class="mock-window">
+        <div class="mock-titlebar"><i></i><i></i><i></i><span>terminal — chengetai cli</span></div>
+        <div class="mock-body">
+          <div class="console" style="min-height:auto;">
+            <div class="ln info">$ chengetai login --key CHG-XXXX-XXXX-XXXX</div>
+            <div class="ln ok">✓ Authenticated with api.chengetailabs.co.zw</div>
+            <div class="ln dim">&nbsp;</div>
+            <div class="ln info">$ chengetai servers list</div>
+            <div class="ln ok">za-jnb-01   4 vCPU / 8 GB   healthy</div>
+            <div class="ln dim">&nbsp;</div>
+            <div class="ln info">$ chengetai deploy dspace --institution "Great Lakes University"</div>
+            <div class="ln ok">✓ Job job_8h2k created — streaming logs…</div>
+            <div class="ln ok">✓ Live at https://dspace.glu.chengetailabs.co.zw</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- API preview -->
 <section class="section section-alt">
   <div class="container split">

@@ -360,6 +360,19 @@ h3 { font-size: 1.25rem; }
 .console .dim { color: var(--text-dim); }
 .console .err { color: #f87171; }
 
+/* ---------- Copyable command line ---------- */
+.cmd {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  background: #04100a; border: 1px solid var(--line-strong); border-radius: var(--radius-md);
+  padding: 12px 14px; margin: 10px 0;
+}
+.cmd code {
+  font-family: var(--font-mono); font-size: 0.84rem; color: var(--text-soft);
+  white-space: nowrap; overflow-x: auto;
+}
+.cmd code::before { content: "$ "; color: var(--green); }
+.copy-btn { flex-shrink: 0; }
+
 /* ---------- Pricing ---------- */
 .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
 .price-card {
