@@ -3,9 +3,11 @@
 **Building Africa's Intelligent Digital Infrastructure**
 AI • Cloud • Digital Libraries • Education • Research • Agriculture • Enterprise Solutions
 
-A fully static, self-contained website for ChengetAi Labs. No build step, no database,
-no external requests — deployable on GitHub Pages, WebZim/cPanel shared hosting, or any
-web server.
+The production website for ChengetAi Labs, live at **https://www.chengetailabs.co.zw**.
+Fully static and self-contained — no build step, no database — deployable on
+WebZim/cPanel shared hosting, GitHub Pages, or any web server. The Deploy page
+integrates with the live ChengetAi Deploy API at `https://api.chengetailabs.co.zw`
+(JWT auth, real deployment jobs with polled logs).
 
 ## Pages
 

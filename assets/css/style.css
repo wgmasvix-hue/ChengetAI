@@ -358,6 +358,7 @@ h3 { font-size: 1.25rem; }
 .console .info { color: var(--sky); }
 .console .warn { color: var(--gold); }
 .console .dim { color: var(--text-dim); }
+.console .err { color: #f87171; }
 
 /* ---------- Pricing ---------- */
 .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }

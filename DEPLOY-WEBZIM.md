@@ -43,6 +43,12 @@ The site works on both HTTP and HTTPS with no changes.
   international bandwidth is degraded.
 - **Friendly URLs:** `.htaccess` maps `/pricing` → `/pricing.html`, adds caching,
   compression and security headers, and serves a branded `404.html`.
+- **Deploy page API:** `deploy.html` talks to the live API at
+  `https://api.chengetailabs.co.zw/api` (JWT sign-in, real deployment jobs).
+  Make sure the backend's Nginx CORS configuration allows the site origins
+  `https://www.chengetailabs.co.zw` and `https://chengetailabs.co.zw`
+  (headers `Access-Control-Allow-Origin`, `Access-Control-Allow-Headers:
+  Content-Type, Authorization`, and the `OPTIONS` preflight method).
 - **Contact form:** the form currently shows a client-side confirmation. To receive
   real messages, point the form at a backend or a form service (e.g. add
   `action="https://formspree.io/f/yourid" method="POST"` to the form in
