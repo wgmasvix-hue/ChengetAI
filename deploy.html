@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChengetAi Deploy — Enterprise Deployment Automation</title>
+  <meta name="description" content="Deploy DSpace, Koha, Moodle, OJS, Nextcloud, WordPress and Docker applications automatically with ChengetAi Deploy.">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2322c55e'/><text x='50' y='70' font-size='60' text-anchor='middle' font-family='sans-serif' font-weight='bold' fill='%23071209'>C</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container-wide nav-inner">
+    <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="cloud.html">Cloud</a></li>
+        <li><a href="ai.html">AI</a></li>
+        <li><a href="solutions.html">Solutions</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="portal.html">Sign In</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Home</a> / <a href="products.html">Products</a> / <b>ChengetAi Deploy</b></nav>
+    <span class="eyebrow">ChengetAi Deploy</span>
+    <h1>Enterprise software, <span class="grad-text">deployed in one click</span></h1>
+    <p class="lead">DSpace, Koha, Moodle, OJS, Nextcloud, WordPress and any Docker application — installed, configured, secured and SSL-enabled automatically on ChengetAi Cloud.</p>
+  </div>
+</section>
+
+<!-- INTERACTIVE DEPLOY -->
+<section class="section">
+  <div class="container split" style="align-items:start;">
+    <div class="reveal">
+      <span class="eyebrow">Try it</span>
+      <h2>Deploy Application</h2>
+      <p class="lead" style="margin:14px 0 26px;">This is a live simulation of the ChengetAi Deploy experience. Pick a platform, name your institution and press Deploy.</p>
+      <form id="deploy-form" class="form-grid" autocomplete="off">
+        <div class="field">
+          <label>Select Platform</label>
+          <div class="platform-grid">
+            <label class="platform-option">
+              <input type="radio" name="platform" value="DSpace" checked>
+              <span class="opt-card"><span class="opt-ico">🗄</span><b>DSpace</b><small>Institutional repository</small></span>
+            </label>
+            <label class="platform-option">
+              <input type="radio" name="platform" value="Koha">
+              <span class="opt-card"><span class="opt-ico">📚</span><b>Koha</b><small>Library system</small></span>
+            </label>
+            <label class="platform-option">
+              <input type="radio" name="platform" value="Moodle">
+              <span class="opt-card"><span class="opt-ico">🎓</span><b>Moodle</b><small>Learning management</small></span>
+            </label>
+            <label class="platform-option">
+              <input type="radio" name="platform" value="OJS">
+              <span class="opt-card"><span class="opt-ico">📰</span><b>OJS</b><small>Journal publishing</small></span>
+            </label>
+            <label class="platform-option">
+              <input type="radio" name="platform" value="Nextcloud">
+              <span class="opt-card"><span class="opt-ico">☁️</span><b>Nextcloud</b><small>File collaboration</small></span>
+            </label>
+            <label class="platform-option">
+              <input type="radio" name="platform" value="WordPress">
+              <span class="opt-card"><span class="opt-ico">🌐</span><b>WordPress</b><small>Website / portal</small></span>
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="dep-inst">Institution Name</label>
+            <input id="dep-inst" type="text" placeholder="e.g. Great Lakes University" required>
+          </div>
+          <div class="field">
+            <label for="dep-server">Server</label>
+            <select id="dep-server">
+              <option>za-jnb-01 · 4 vCPU / 8 GB · Johannesburg</option>
+              <option>ke-nbo-01 · 4 vCPU / 8 GB · Nairobi</option>
+              <option>de-fra-02 · 8 vCPU / 16 GB · Frankfurt</option>
+              <option>+ Provision a new server</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" id="deploy-btn">🚀 Deploy</button>
+      </form>
+    </div>
+    <div class="reveal">
+      <h3 style="margin-bottom:14px;">Deployment console</h3>
+      <div class="console" id="deploy-console">
+        <div class="ln dim">Awaiting deployment… select a platform and press Deploy.</div>
+      </div>
+      <div class="notice" style="margin-top:16px;" id="deploy-result" hidden>
+        ✅ <span id="deploy-result-text"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORTED STACKS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Supported Platforms</span>
+      <h2>The stacks African institutions run on</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="card reveal"><div class="card-icon">🗄</div><h3>DSpace</h3><p>Institutional repositories with OAI-PMH, handle server and Solr search — production-tuned.</p></div>
+      <div class="card reveal"><div class="card-icon">📚</div><h3>Koha</h3><p>The world's leading open-source ILS, with Zebra/Elasticsearch and SIP2 configured.</p></div>
+      <div class="card reveal"><div class="card-icon">🎓</div><h3>Moodle</h3><p>LMS deployments scaled for enrolment peaks, with backups before every upgrade.</p></div>
+      <div class="card reveal"><div class="card-icon">📰</div><h3>OJS</h3><p>Open Journal Systems for accredited, indexed African scholarship.</p></div>
+      <div class="card reveal"><div class="card-icon">☁️</div><h3>Nextcloud</h3><p>Private file sync and collaboration with office integration.</p></div>
+      <div class="card reveal"><div class="card-icon">🌐</div><h3>WordPress</h3><p>Hardened WordPress with caching, WAF rules and automatic updates.</p></div>
+      <div class="card reveal"><div class="card-icon">🐳</div><h3>Docker Applications</h3><p>Bring any compose file — we run it with registry, secrets and rollbacks.</p></div>
+      <div class="card reveal"><div class="card-icon">🔁</div><h3>Upgrades &amp; Rollbacks</h3><p>Every deployment is versioned. Upgrade with confidence, roll back in seconds.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Your next system could be <span class="grad-text">live this afternoon</span></h2>
+      <p>Talk to us about migrating an existing installation or standing up something new.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="portal.html">Get Started</a>
+        <a class="btn btn-ghost btn-lg" href="contact.html#demo">Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+        <p>An African technology company building intelligent digital infrastructure that accelerates education, research, agriculture and enterprise transformation across the continent.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="cloud.html">ChengetAi Cloud</a></li>
+          <li><a href="deploy.html">ChengetAi Deploy</a></li>
+          <li><a href="ai.html">ChengetAi AI</a></li>
+          <li><a href="products.html#learn">ChengetAi Learn</a></li>
+          <li><a href="products.html#research">ChengetAi Research</a></li>
+          <li><a href="products.html#agriculture">ChengetAi Agriculture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions.html#universities">Universities</a></li>
+          <li><a href="solutions.html#polytechnics">Polytechnics</a></li>
+          <li><a href="solutions.html#government">Government</a></li>
+          <li><a href="solutions.html#libraries">Libraries</a></li>
+          <li><a href="solutions.html#agriculture">Agriculture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="resources.html">Documentation</a></li>
+          <li><a href="resources.html#guides">Installation Guides</a></li>
+          <li><a href="resources.html#api">API Docs</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portal.html">Customer Portal</a></li>
+          <li><a href="admin.html">Admin Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> ChengetAi Labs. All rights reserved.</span>
+      <span>AI • Cloud • Digital Libraries • Education • Research • Agriculture • Enterprise</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/deploy.js"></script>
+</body>
+</html>

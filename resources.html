@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources — ChengetAi Labs</title>
+  <meta name="description" content="Documentation, installation guides, tutorials, videos, API documentation and knowledge base.">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2322c55e'/><text x='50' y='70' font-size='60' text-anchor='middle' font-family='sans-serif' font-weight='bold' fill='%23071209'>C</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container-wide nav-inner">
+    <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cloud.html">Cloud</a></li>
+        <li><a href="ai.html">AI</a></li>
+        <li><a href="solutions.html">Solutions</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="resources.html" class="active">Resources</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="portal.html">Sign In</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Home</a> / <b>Resources</b></nav>
+    <span class="eyebrow">Resources</span>
+    <h1>Everything you need to <span class="grad-text">build and operate</span></h1>
+    <p class="lead">Documentation, installation guides, tutorials, videos, API documentation and a searchable knowledge base — for administrators, developers and end users.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-3">
+      <div class="card reveal" id="docs">
+        <div class="card-icon">📖</div>
+        <h3>Documentation</h3>
+        <p>Product manuals for ChengetAi Cloud, Deploy, AI, Learn, Research and Agriculture — from first login to advanced configuration.</p>
+        <a class="card-link" href="contact.html">Request access →</a>
+      </div>
+      <div class="card reveal" id="guides">
+        <div class="card-icon">🧭</div>
+        <h3>Installation Guides</h3>
+        <p>Step-by-step guides for DSpace, Koha, Moodle, OJS, Nextcloud and WordPress on ChengetAi Cloud — with checklists for go-live.</p>
+        <a class="card-link" href="deploy.html">Or skip the install — use Deploy →</a>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🎬</div>
+        <h3>Tutorials &amp; Videos</h3>
+        <p>Short, practical walkthroughs: launching your first server, restoring a backup, connecting the AI assistant to a repository.</p>
+        <a class="card-link" href="contact.html">Get the playlist →</a>
+      </div>
+      <div class="card reveal" id="api">
+        <div class="card-icon">🔌</div>
+        <h3>API Documentation</h3>
+        <p>REST APIs for provisioning, deployments, monitoring and the AI platform — with examples in curl, Python and JavaScript.</p>
+        <a class="card-link" href="contact.html">Request an API key →</a>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">💡</div>
+        <h3>Knowledge Base</h3>
+        <p>Searchable answers to common questions — billing, DNS, email deliverability, performance tuning and more.</p>
+        <a class="card-link" href="contact.html">Browse articles →</a>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🤝</div>
+        <h3>Community &amp; Support</h3>
+        <p>Open a support ticket from your portal, or join the ChengetAi community of library, education and agri technologists.</p>
+        <a class="card-link" href="portal.html">Open the portal →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- API preview -->
+<section class="section section-alt">
+  <div class="container split">
+    <div class="reveal">
+      <span class="eyebrow">For Developers</span>
+      <h2>Automate everything we host</h2>
+      <p class="lead" style="margin-top:16px;">Everything in the portal is available over the API — provision servers, trigger deployments, query metrics and drive the AI platform from your own tooling.</p>
+      <ul class="feature-list" style="margin-top:22px;">
+        <li>Token-based authentication with scoped keys</li>
+        <li>Webhooks for deployment and monitoring events</li>
+        <li>Rate-limited, versioned, documented endpoints</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="mock-window">
+        <div class="mock-titlebar"><i></i><i></i><i></i><span>api.chengetai.africa/v1</span></div>
+        <div class="mock-body">
+          <div class="console" style="min-height:auto;">
+            <div class="ln info">$ curl -H "Authorization: Bearer $TOKEN" \</div>
+            <div class="ln info">    https://api.chengetai.africa/v1/deployments \</div>
+            <div class="ln info">    -d platform=dspace -d server=za-jnb-01</div>
+            <div class="ln dim">&nbsp;</div>
+            <div class="ln ok">{ "id": "dep_8h2k", "platform": "dspace",</div>
+            <div class="ln ok">  "status": "provisioning", "eta_seconds": 220 }</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Can't find what you need?</h2>
+      <p>Our support team answers real questions from real administrators every day. Ask us.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="contact.html">Contact Support</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+        <p>An African technology company building intelligent digital infrastructure that accelerates education, research, agriculture and enterprise transformation across the continent.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="cloud.html">ChengetAi Cloud</a></li>
+          <li><a href="deploy.html">ChengetAi Deploy</a></li>
+          <li><a href="ai.html">ChengetAi AI</a></li>
+          <li><a href="products.html#learn">ChengetAi Learn</a></li>
+          <li><a href="products.html#research">ChengetAi Research</a></li>
+          <li><a href="products.html#agriculture">ChengetAi Agriculture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions.html#universities">Universities</a></li>
+          <li><a href="solutions.html#polytechnics">Polytechnics</a></li>
+          <li><a href="solutions.html#government">Government</a></li>
+          <li><a href="solutions.html#libraries">Libraries</a></li>
+          <li><a href="solutions.html#agriculture">Agriculture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="resources.html">Documentation</a></li>
+          <li><a href="resources.html#guides">Installation Guides</a></li>
+          <li><a href="resources.html#api">API Docs</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portal.html">Customer Portal</a></li>
+          <li><a href="admin.html">Admin Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> ChengetAi Labs. All rights reserved.</span>
+      <span>AI • Cloud • Digital Libraries • Education • Research • Agriculture • Enterprise</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
