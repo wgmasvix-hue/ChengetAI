@@ -16,16 +16,16 @@ integrates with the live ChengetAi Deploy API at `https://api.chengetailabs.co.z
 | `index.html` | Homepage — animated connected-globe hero, ecosystem, industries |
 | `products.html` | All six products: Cloud, Deploy, AI, Learn, Research, Agriculture |
 | `cloud.html` | ChengetAi Cloud — dashboard showcase and capabilities |
-| `deploy.html` | ChengetAi Deploy — **interactive deployment simulator** |
+| `deploy.html` | ChengetAi Deploy — **live deployments via the API** (key-gated) |
 | `ai.html` | ChengetAi AI — assistants, RAG, chatbots, document intelligence |
 | `solutions.html` | Industries: universities, polytechnics, government, libraries, agriculture |
-| `research.html` | Whitepapers, open source, Innovation Lab |
+| `research.html` | Research agenda, open source, Innovation Lab |
 | `pricing.html` | Starter / Professional / Enterprise / Managed Cloud + FAQ |
 | `resources.html` | Docs, guides, tutorials, API documentation, knowledge base |
 | `about.html` | Mission, core values, technology stack |
 | `contact.html` | Contact form: support, sales, partnerships, demo requests |
-| `portal.html` | Customer portal demo (sign in → dashboard) |
-| `admin.html` | Administrator portal demo (fleet operations view) |
+| `portal.html` | Customer portal — real API sign-in, live server & deployment data |
+| `admin.html` | Administrator sign-in (console itself runs on the internal network) |
 
 ## Structure
 
@@ -35,8 +35,9 @@ assets/css/fonts.css   — self-hosted fonts (Inter, Sora, JetBrains Mono)
 assets/fonts/          — woff2 variable fonts
 assets/js/main.js      — nav, scroll reveal, tabs, forms
 assets/js/globe.js     — animated hero globe (canvas)
-assets/js/deploy.js    — deployment simulator
-assets/js/portal.js    — portal demo sign-in flow
+assets/js/deploy.js    — live deployment client (JWT/key auth, job polling)
+assets/js/portal.js    — portal sign-in + live data from the API
+assets/img/logo.svg    — brand mark (gradient shield)
 .htaccess              — Apache config: friendly URLs, caching, security headers
 404.html               — branded error page
 ```

@@ -419,7 +419,7 @@
     var platform = form.querySelector('input[name="platform"]:checked').value;
     var institution = document.getElementById("dep-inst").value.trim();
     if (!institution) return;
-    var server = serverSelect ? serverSelect.value : null;
+    var server = (serverSelect && serverSelect.value) ? serverSelect.value : null;
 
     resultBox.hidden = true;
     setDeploying(true);

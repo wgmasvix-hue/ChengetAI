@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="ChengetAi Labs">
+  <defs>
+    <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="0.55" stop-color="#a3e635"/>
+      <stop offset="1" stop-color="#f5b841"/>
+    </linearGradient>
+  </defs>
+  <!-- Shield: "chengeta" — to keep, to protect -->
+  <path d="M24 2.5 41.5 9.2V23c0 10.9-7.3 18.6-17.5 22.3C13.8 41.6 6.5 33.9 6.5 23V9.2Z" fill="url(#cg)"/>
+  <!-- C arc with connected node -->
+  <path d="M30.6 18.4a8.6 8.6 0 1 0 0 11.2" fill="none" stroke="#071409" stroke-width="4.6" stroke-linecap="round"/>
+  <circle cx="32.2" cy="24" r="2.7" fill="#071409"/>
+</svg>

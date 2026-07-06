@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://www.chengetailabs.co.zw/portal.html">
   <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2322c55e'/><text x='50' y='70' font-size='60' text-anchor='middle' font-family='sans-serif' font-weight='bold' fill='%23071209'>C</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
 </head>
 <body>
 
@@ -41,113 +41,62 @@
   <div class="auth-card reveal in">
     <a class="logo" href="index.html" style="margin-bottom:22px;"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Cloud</a>
     <h1>Sign in to your portal</h1>
-    <p>Manage servers, deployments, backups, billing and support.</p>
+    <p>Manage your servers and deployments with your ChengetAi Cloud account.</p>
     <form class="form-grid" id="portal-login">
       <div class="field">
         <label for="pl-email">Email</label>
-        <input id="pl-email" type="email" placeholder="you@institution.ac.zw" required>
+        <input id="pl-email" type="email" autocomplete="username" placeholder="you@institution.ac.zw" required>
       </div>
       <div class="field">
         <label for="pl-pass">Password</label>
-        <input id="pl-pass" type="password" placeholder="••••••••" required>
+        <input id="pl-pass" type="password" autocomplete="current-password" placeholder="••••••••" required>
       </div>
       <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-      <p style="font-size:0.8rem; color:var(--text-dim); text-align:center;">Demo portal — any email and password opens the preview dashboard.<br>Production sign-in is backed by Supabase Auth / Keycloak.</p>
+      <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem; text-align:center;"></p>
+      <p style="font-size:0.8rem; color:var(--text-dim); text-align:center;">No account yet? <a href="contact.html" style="color:var(--green);">Contact us</a> to get set up.</p>
     </form>
   </div>
 </section>
 
-<!-- DASHBOARD (hidden until "signed in") -->
+<!-- DASHBOARD (real data, loaded from the API after sign-in) -->
 <div class="portal-shell" id="portal-dash" hidden>
   <aside class="portal-side">
     <a href="#overview" class="active">📊 Overview</a>
     <a href="#servers">🖥 My Servers</a>
     <a href="#deployments">🚀 Deployments</a>
-    <a href="#resources">☁️ Cloud Resources</a>
-    <a href="#backups">💾 Backups</a>
-    <a href="#billing">💳 Billing</a>
-    <a href="#team">👥 Team Management</a>
-    <a href="#tickets">🛟 Support Tickets</a>
-    <a href="#assistant">🧠 AI Assistant</a>
+    <a href="deploy.html">➕ New Deployment</a>
+    <a href="cloud.html#rent">☁️ Rent a Server</a>
+    <a href="contact.html">🛟 Support</a>
   </aside>
   <main class="portal-main">
-    <h1>Welcome back, <span class="grad-text" id="portal-user">Demo User</span></h1>
-    <p class="portal-sub">Great Lakes University · Professional plan · All systems operational</p>
+    <h1 id="overview">Welcome back<span id="portal-user"></span></h1>
+    <p class="portal-sub">Your live infrastructure, straight from the ChengetAi Cloud API.</p>
 
-    <div class="metric-row" id="overview">
-      <div class="metric"><label>My Servers</label><b>3</b><span class="delta">all healthy</span></div>
-      <div class="metric"><label>Deployments</label><b>5</b><span class="delta">1 update available</span></div>
-      <div class="metric"><label>Backups (30d)</label><b>90</b><span class="delta">last 04:00</span></div>
-      <div class="metric"><label>Open Tickets</label><b>1</b><span class="delta warn">awaiting your reply</span></div>
-    </div>
-
-    <div class="mock-window" id="servers" style="margin-top:22px;">
+    <div class="mock-window" id="servers">
       <div class="mock-titlebar"><i></i><i></i><i></i><span>My Servers</span></div>
       <div class="mock-body">
         <table class="mock-table">
-          <thead><tr><th>Server</th><th>Plan</th><th>Service</th><th>Status</th><th></th></tr></thead>
-          <tbody>
-            <tr><td class="mono">glu-repo-01</td><td>4 vCPU / 8 GB</td><td>DSpace 8</td><td><span class="status ok">Healthy</span></td><td><a class="card-link" href="#servers">Manage</a></td></tr>
-            <tr><td class="mono">glu-lms-01</td><td>4 vCPU / 8 GB</td><td>Moodle 4.5</td><td><span class="status ok">Healthy</span></td><td><a class="card-link" href="#servers">Manage</a></td></tr>
-            <tr><td class="mono">glu-lib-01</td><td>2 vCPU / 4 GB</td><td>Koha 24.05</td><td><span class="status ok">Healthy</span></td><td><a class="card-link" href="#servers">Manage</a></td></tr>
+          <thead><tr><th>Server</th><th>Specs</th><th>Region</th><th>Status</th></tr></thead>
+          <tbody id="p-servers">
+            <tr><td colspan="4" style="color:var(--text-dim);">Loading your servers…</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="grid grid-2" style="margin-top:22px;" id="deployments">
-      <div class="mock-window">
-        <div class="mock-titlebar"><i></i><i></i><i></i><span>Recent Deployments</span></div>
-        <div class="mock-body">
-          <table class="mock-table">
-            <tbody>
-              <tr><td>DSpace 8.1 upgrade</td><td class="mono">glu-repo-01</td><td><span class="status ok">Done</span></td></tr>
-              <tr><td>Moodle theme update</td><td class="mono">glu-lms-01</td><td><span class="status ok">Done</span></td></tr>
-              <tr><td>Koha 24.11 upgrade</td><td class="mono">glu-lib-01</td><td><span class="status warn">Scheduled</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="mock-window" id="backups">
-        <div class="mock-titlebar"><i></i><i></i><i></i><span>Backups</span></div>
-        <div class="mock-body">
-          <table class="mock-table">
-            <tbody>
-              <tr><td>Nightly full — all servers</td><td class="mono">04:00 CAT</td><td><span class="status ok">OK</span></td></tr>
-              <tr><td>Weekly restore drill</td><td class="mono">Sun 02:00</td><td><span class="status ok">Verified</span></td></tr>
-              <tr><td>Off-site DR replica</td><td class="mono">continuous</td><td><span class="status ok">In sync</span></td></tr>
-            </tbody>
-          </table>
-          <div style="margin-top:14px;"><a class="btn btn-ghost btn-sm" href="#backups">⏪ Restore a backup</a></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-2" style="margin-top:22px;">
-      <div class="mock-window" id="billing">
-        <div class="mock-titlebar"><i></i><i></i><i></i><span>Billing · Team</span></div>
-        <div class="mock-body">
-          <table class="mock-table">
-            <tbody>
-              <tr><td>Professional plan</td><td class="mono">$99 / month</td><td><span class="status ok">Paid</span></td></tr>
-              <tr><td>Next invoice</td><td class="mono">1 Aug 2026</td><td><span class="status warn">Upcoming</span></td></tr>
-              <tr id="team"><td>Team members</td><td class="mono">4 users</td><td><a class="card-link" href="#team">Manage</a></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="mock-window" id="assistant">
-        <div class="mock-titlebar"><i></i><i></i><i></i><span>AI Assistant</span></div>
-        <div class="mock-body" style="font-size:0.86rem;" id="tickets">
-          <p style="color:var(--text-dim); margin-bottom:10px;">👤 Why is Moodle slower on Monday mornings?</p>
-          <p style="color:var(--text-soft); background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.25); border-radius:12px; padding:12px;">🤖 CPU on <b>glu-lms-01</b> peaks 08:00–09:00 Mondays when quiz submissions spike. Enabling Redis caching (included in your plan) should cut page loads by ~40%. Want me to raise the change ticket?</p>
-        </div>
+    <div class="mock-window" id="deployments" style="margin-top:22px;" hidden>
+      <div class="mock-titlebar"><i></i><i></i><i></i><span>Deployments</span></div>
+      <div class="mock-body">
+        <table class="mock-table">
+          <thead><tr><th>Deployment</th><th>Platform</th><th>Status</th></tr></thead>
+          <tbody id="p-deployments"></tbody>
+        </table>
       </div>
     </div>
 
     <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
       <a class="btn btn-primary" href="deploy.html">🚀 New Deployment</a>
-      <a class="btn btn-ghost" href="#servers">+ Launch a Server</a>
+      <a class="btn btn-ghost" href="cloud.html#rent">+ Rent a Server</a>
       <button class="btn btn-ghost" id="portal-logout" type="button">Sign Out</button>
     </div>
   </main>

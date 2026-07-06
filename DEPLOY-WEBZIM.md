@@ -58,6 +58,7 @@ The site works on both HTTP and HTTPS with no changes.
   real messages, point the form at a backend or a form service (e.g. add
   `action="https://formspree.io/f/yourid" method="POST"` to the form in
   `contact.html`), or wire it to your future ChengetAi API.
-- **Portals:** `portal.html` and `admin.html` are interactive demos of the customer
-  and administrator dashboards. Production sign-in will be backed by Supabase
-  Auth / Keycloak per the platform architecture.
+- **Portals:** `portal.html` and `admin.html` sign in against the live API
+  (`POST /auth/login` with email/password). The customer portal then renders the
+  account's real servers (`GET /servers`) and deployments (`GET /deployments`,
+  optional). Nothing on the site is simulated data.
