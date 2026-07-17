@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App Store — ChengetAi Labs</title>
-  <meta name="description" content="The ChengetAi App Store: SkillMatch, Dare Digital Repository, ChengetAi apps and one-click open-source deployments for African institutions.">
+  <title>ChengetAi Store — Apps for African Institutions & Innovators</title>
+  <meta name="description" content="The ChengetAi Store: SkillMatch, Dare Digital Repository, ChengetAi apps, one-click open-source deployments — and community Android apps published by African developers.">
   <link rel="canonical" href="https://www.chengetailabs.co.zw/appstore.html">
   <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -19,7 +19,7 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="products.html">Products</a></li>
-        <li><a href="appstore.html" class="active">App Store</a></li>
+        <li><a href="appstore.html" class="active">Store</a></li>
         <li><a href="cloud.html">Cloud</a></li>
         <li><a href="ai.html">AI</a></li>
         <li><a href="solutions.html">Solutions</a></li>
@@ -39,10 +39,14 @@
 
 <section class="page-hero">
   <div class="container">
-    <nav class="breadcrumb"><a href="index.html">Home</a> / <b>App Store</b></nav>
-    <span class="eyebrow">ChengetAi App Store</span>
+    <nav class="breadcrumb"><a href="index.html">Home</a> / <b>ChengetAi Store</b></nav>
+    <span class="eyebrow">ChengetAi Store</span>
     <h1>Apps for Africa's <span class="grad-text">institutions and innovators</span></h1>
-    <p class="lead">ChengetAi-built applications and enterprise open-source platforms — discover, request access, or deploy to your ChengetAi Cloud in one click.</p>
+    <p class="lead">ChengetAi-built applications, enterprise open-source platforms — and community Android apps from African developers. Discover, deploy, download, or publish your own.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#community">Browse Mobile Apps</a>
+      <a class="btn btn-ghost" href="#submit">📤 Submit Your APK</a>
+    </div>
   </div>
 </section>
 
@@ -183,13 +187,113 @@
   </div>
 </section>
 
+<!-- COMMUNITY MOBILE APPS -->
+<section class="section" id="community">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Community Mobile Apps</span>
+      <h2>Android apps, published by African developers</h2>
+      <p>APKs reviewed and hosted by ChengetAi Labs. Every listing is scanned and checked before it goes live.</p>
+    </div>
+    <div class="grid grid-3" id="community-grid" aria-live="polite">
+      <div class="card" style="cursor:default;" id="community-empty">
+        <div class="card-icon">📱</div>
+        <h3>Loading community apps…</h3>
+        <p>Fetching the latest published apps from the ChengetAi Store.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMIT AN APK -->
+<section class="section section-alt" id="submit">
+  <div class="container split" style="align-items:start;">
+    <div class="reveal">
+      <span class="eyebrow">For Developers</span>
+      <h2>Publish your app on the ChengetAi Store</h2>
+      <p class="lead" style="margin:14px 0 26px;">Built an Android app for African users? Submit your APK — we review, scan and host it, and your app reaches institutions and users across the continent.</p>
+      <form id="apk-form" class="form-grid" autocomplete="off">
+        <div class="form-row">
+          <div class="field">
+            <label for="apk-name">App Name</label>
+            <input id="apk-name" type="text" placeholder="e.g. FarmLedger" required>
+          </div>
+          <div class="field">
+            <label for="apk-dev">Developer / Company</label>
+            <input id="apk-dev" type="text" placeholder="Your name or studio" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="apk-email">Contact Email</label>
+            <input id="apk-email" type="email" placeholder="dev@example.com" required>
+          </div>
+          <div class="field">
+            <label for="apk-cat">Category</label>
+            <select id="apk-cat">
+              <option>Education</option>
+              <option>Business &amp; Careers</option>
+              <option>Agriculture</option>
+              <option>Research &amp; Libraries</option>
+              <option>Health</option>
+              <option>Finance</option>
+              <option>Utilities</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="apk-desc">Description</label>
+          <textarea id="apk-desc" placeholder="What does your app do, and who is it for?" required></textarea>
+        </div>
+        <div class="field">
+          <label for="apk-file">APK File <small style="color:var(--text-dim); font-weight:400;">(.apk, max 100&nbsp;MB — or paste a download URL below)</small></label>
+          <input id="apk-file" type="file" accept=".apk,application/vnd.android.package-archive">
+        </div>
+        <div class="field">
+          <label for="apk-url">APK Download URL <small style="color:var(--text-dim); font-weight:400;">(optional, instead of a file)</small></label>
+          <input id="apk-url" type="url" placeholder="https://…/yourapp.apk">
+        </div>
+        <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.85rem; color:var(--text-soft); cursor:pointer;">
+          <input id="apk-terms" type="checkbox" required style="margin-top:4px;">
+          <span>I confirm I own or have rights to distribute this app, and I agree to ChengetAi's review process — apps are malware-scanned and checked before listing, and may be removed if they violate store policies.</span>
+        </label>
+        <button type="submit" class="btn btn-primary btn-lg" id="apk-btn">📤 Submit for Review</button>
+        <div class="notice success" id="apk-success" hidden>✅ <span id="apk-success-text"></span></div>
+        <div class="notice" id="apk-fallback" hidden>ℹ️ <span>The submissions service isn't reachable right now. Please use the <a href="contact.html?enquiry=app&app=APK+submission#demo" style="color:var(--green);">contact form</a> with a link to your APK, and our team will process it manually.</span></div>
+        <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem;"></p>
+      </form>
+    </div>
+    <div class="reveal">
+      <div class="card" style="cursor:default;">
+        <h3 style="margin-top:0;">How review works</h3>
+        <ul class="feature-list">
+          <li>Submit your APK with a description and category</li>
+          <li>Automated malware and permissions scan</li>
+          <li>Human review against store policies</li>
+          <li>Approved apps are listed with your developer name</li>
+          <li>Updates go through the same pipeline — versioned, always</li>
+        </ul>
+      </div>
+      <div class="card" style="cursor:default; margin-top:16px;">
+        <h3 style="margin-top:0;">What we look for</h3>
+        <ul class="feature-list">
+          <li>Works offline or on low bandwidth where possible</li>
+          <li>No hidden data collection — permissions must match purpose</li>
+          <li>Clear value for African users and institutions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="cta-banner reveal">
       <h2>Building something for African institutions?</h2>
-      <p>Partners can list applications in the ChengetAi App Store and deploy them on our infrastructure.</p>
+      <p>Web platforms, enterprise systems or Android apps — publish them in the ChengetAi Store and reach institutions across the continent.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="contact.html?enquiry=app&app=Partner+app+listing#demo">Publish Your App</a>
+        <a class="btn btn-primary btn-lg" href="#submit">Publish Your App</a>
         <a class="btn btn-ghost btn-lg" href="deploy.html">Open ChengetAi Deploy</a>
       </div>
     </div>
@@ -209,7 +313,7 @@
           <li><a href="cloud.html">ChengetAi Cloud</a></li>
           <li><a href="deploy.html">ChengetAi Deploy</a></li>
           <li><a href="products.html#dare">Dare Digital Repository</a></li>
-          <li><a href="appstore.html">App Store</a></li>
+          <li><a href="appstore.html">ChengetAi Store</a></li>
           <li><a href="ai.html">ChengetAi AI</a></li>
           <li><a href="products.html#learn">ChengetAi Learn</a></li>
           <li><a href="products.html#research">ChengetAi Research</a></li>
@@ -254,6 +358,6 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
-
+<script src="assets/js/store.js"></script>
 </body>
 </html>

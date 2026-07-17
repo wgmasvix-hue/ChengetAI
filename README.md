@@ -15,7 +15,7 @@ integrates with the live ChengetAi Deploy API at `https://api.chengetailabs.co.z
 |---|---|
 | `index.html` | Homepage — animated connected-globe hero, ecosystem, industries |
 | `products.html` | All seven products: Cloud, Deploy, Dare, AI, Learn, Research, Agriculture |
-| `appstore.html` | **App Store** — featured SkillMatch, searchable app catalogue |
+| `appstore.html` | **ChengetAi Store** — SkillMatch featured, searchable catalogue, community APK listings + developer submissions |
 | `cloud.html` | ChengetAi Cloud — dashboard showcase and capabilities |
 | `deploy.html` | ChengetAi Deploy — **live deployments via the API** (key-gated) |
 | `ai.html` | ChengetAi AI — assistants, RAG, chatbots, document intelligence |
@@ -38,7 +38,8 @@ assets/js/main.js      — nav, scroll reveal, tabs, forms
 assets/js/globe.js     — animated hero globe (canvas)
 assets/js/deploy.js    — live deployment client (JWT/key auth, job polling)
 assets/js/portal.js    — portal sign-in + live data from the API
-assets/img/logo.svg    — brand mark (gradient shield)
+assets/img/logo.svg    — brand mark (gradient shield, rim light + AI spark)
+assets/js/store.js     — community APK listings + submissions (API-backed)
 .htaccess              — Apache config: friendly URLs, caching, security headers
 404.html               — branded error page
 ```

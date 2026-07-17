@@ -54,6 +54,14 @@ The site works on both HTTP and HTTPS with no changes.
   `https://www.chengetailabs.co.zw` and `https://chengetailabs.co.zw`
   (headers `Access-Control-Allow-Origin`, `Access-Control-Allow-Headers:
   Content-Type, Authorization`, and the `OPTIONS` preflight method).
+- **ChengetAi Store (APKs):** `appstore.html` lists community Android apps from
+  `GET /store/apps` and accepts developer submissions at
+  `POST /store/submissions` (multipart form: name, developer, email, category,
+  description, and either an `apk` file or `apkUrl`). Until those endpoints
+  exist, the page shows an honest "coming soon" state and routes submissions to
+  the contact form. When you deploy the endpoints, raise Nginx's
+  `client_max_body_size` to at least `100M` and include the store routes in the
+  CORS configuration.
 - **Contact form:** the form currently shows a client-side confirmation. To receive
   real messages, point the form at a backend or a form service (e.g. add
   `action="https://formspree.io/f/yourid" method="POST"` to the form in
