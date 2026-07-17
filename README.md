@@ -14,7 +14,8 @@ integrates with the live ChengetAi Deploy API at `https://api.chengetailabs.co.z
 | Page | Purpose |
 |---|---|
 | `index.html` | Homepage — animated connected-globe hero, ecosystem, industries |
-| `products.html` | All six products: Cloud, Deploy, AI, Learn, Research, Agriculture |
+| `products.html` | All seven products: Cloud, Deploy, Dare, AI, Learn, Research, Agriculture |
+| `appstore.html` | **App Store** — featured SkillMatch, searchable app catalogue |
 | `cloud.html` | ChengetAi Cloud — dashboard showcase and capabilities |
 | `deploy.html` | ChengetAi Deploy — **live deployments via the API** (key-gated) |
 | `ai.html` | ChengetAi AI — assistants, RAG, chatbots, document intelligence |

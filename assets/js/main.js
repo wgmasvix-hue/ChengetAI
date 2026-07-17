@@ -64,23 +64,67 @@
     });
   });
 
-  /* Contact form prefill from query params (used by server rental buttons:
-     contact.html?enquiry=server&plan=Cloud+VPS+M) */
+  /* Contact form prefill from query params, used by server-rental buttons
+     (?enquiry=server&plan=…) and App Store buttons (?enquiry=app&app=…) */
   var topicSelect = document.getElementById("ct-topic");
   var msgField = document.getElementById("ct-msg");
+  function selectTopic(text) {
+    for (var i = 0; i < topicSelect.options.length; i++) {
+      if (topicSelect.options[i].text === text) { topicSelect.selectedIndex = i; return; }
+    }
+  }
   if (topicSelect && window.location.search) {
     var params = new URLSearchParams(window.location.search);
     var enquiry = params.get("enquiry");
     var plan = params.get("plan");
+    var app = params.get("app");
     if (enquiry === "server") {
-      for (var i = 0; i < topicSelect.options.length; i++) {
-        if (topicSelect.options[i].text === "Server rental order") { topicSelect.selectedIndex = i; break; }
-      }
+      selectTopic("Server rental order");
       if (plan && msgField && !msgField.value) {
         msgField.value = "I would like to rent a cloud server — plan: " + plan + ".\n" +
           "Preferred region: \nOperating system: \nManaged or root access: \nBilling: monthly / annual";
       }
+    } else if (enquiry === "app") {
+      selectTopic("App Store enquiry");
+      if (app && msgField && !msgField.value) {
+        msgField.value = "I'm interested in " + app + " from the ChengetAi App Store.\n" +
+          "Organisation type: \nIntended use: ";
+      }
     }
+  }
+
+  /* App Store: search + category filter */
+  var appGrid = document.getElementById("app-grid");
+  if (appGrid) {
+    var appCards = appGrid.querySelectorAll("[data-app]");
+    var searchBox = document.getElementById("app-search");
+    var filterBtns = document.querySelectorAll("#app-filters .tab-btn");
+    var emptyMsg = document.getElementById("app-empty");
+    var activeFilter = "all";
+
+    function applyAppFilter() {
+      var q = (searchBox && searchBox.value || "").trim().toLowerCase();
+      var shown = 0;
+      appCards.forEach(function (card) {
+        var matchesCat = activeFilter === "all" ||
+          (card.dataset.category || "").split(/\s+/).indexOf(activeFilter) !== -1;
+        var matchesText = !q || card.textContent.toLowerCase().indexOf(q) !== -1;
+        var show = matchesCat && matchesText;
+        card.style.display = show ? "" : "none";
+        if (show) shown++;
+      });
+      if (emptyMsg) emptyMsg.style.display = shown ? "none" : "block";
+    }
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        filterBtns.forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        applyAppFilter();
+      });
+    });
+    if (searchBox) searchBox.addEventListener("input", applyAppFilter);
   }
 
   /* Copy-to-clipboard for command snippets */
