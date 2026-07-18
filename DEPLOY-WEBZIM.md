@@ -62,6 +62,13 @@ The site works on both HTTP and HTTPS with no changes.
   the contact form. When you deploy the endpoints, raise Nginx's
   `client_max_body_size` to at least `100M` and include the store routes in the
   CORS configuration.
+- **ChengetAi Studio:** `studio.html` calls the AI platform with the visitor's
+  deployment-key session: `POST /ai/code` (`{prompt, language}` → `{code}`),
+  `POST /ai/image` (`{prompt, size}` → `{imageUrl}` or `{b64}`),
+  `POST /ai/fullstack` (`{prompt, stack}` → `{files:[{path, content}]}`), and
+  `POST /ai/agents` (`{prompt, tools}` → `{agent}` text/YAML). Until these
+  endpoints are live, the page shows a truthful "rolling out" notice with an
+  early-access link — no fake output.
 - **Contact form:** the form currently shows a client-side confirmation. To receive
   real messages, point the form at a backend or a form service (e.g. add
   `action="https://formspree.io/f/yourid" method="POST"` to the form in

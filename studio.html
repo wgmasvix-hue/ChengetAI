@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChengetAi Studio — Code, Image, Full-Stack & Agent Generation</title>
+  <meta name="description" content="A Google AI Studio-style workspace on ChengetAi: generate code, create images, scaffold full-stack applications and design AI agents.">
+  <link rel="canonical" href="https://www.chengetailabs.co.zw/studio.html">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container-wide nav-inner">
+    <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="appstore.html">Store</a></li>
+        <li><a href="cloud.html">Cloud</a></li>
+        <li><a href="ai.html">AI</a></li>
+        <li><a href="studio.html" class="active">Studio</a></li>
+        <li><a href="solutions.html">Solutions</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="portal.html">Sign In</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Home</a> / <b>ChengetAi Studio</b></nav>
+    <span class="eyebrow">ChengetAi Studio</span>
+    <h1>Build with AI, <span class="grad-text">right in your browser</span></h1>
+    <p class="lead">Four studios, one workspace: generate code, create images, scaffold full-stack applications and design AI agents — powered by the ChengetAi AI platform, gated by your deployment key.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-wide">
+    <div class="studio-shell">
+
+      <!-- STUDIO PICKER -->
+      <aside class="studio-side" id="studio-picker">
+        <div class="side-label">Studios</div>
+        <button class="active" data-studio="code">💻 Code Studio</button>
+        <button data-studio="image">🎨 Image Studio</button>
+        <button data-studio="fullstack">🏗 Full-Stack Studio</button>
+        <button data-studio="agent">🤖 Agent Studio</button>
+        <div class="side-label" style="margin-top:14px;">Session</div>
+        <button id="studio-key-btn" type="button">🔑 <span id="studio-key-label">Activate key</span></button>
+      </aside>
+
+      <!-- WORKSPACE -->
+      <div class="studio-main">
+        <div class="studio-topbar">
+          <h2 id="studio-title">💻 Code Studio</h2>
+          <div class="controls">
+            <select id="ctl-language" aria-label="Language">
+              <option>Python</option><option>JavaScript</option><option>TypeScript</option>
+              <option>Go</option><option>Java</option><option>PHP</option><option>SQL</option><option>Bash</option>
+            </select>
+            <select id="ctl-size" aria-label="Image size" hidden>
+              <option value="1024x1024">Square · 1024</option>
+              <option value="1344x768">Landscape · 1344×768</option>
+              <option value="768x1344">Portrait · 768×1344</option>
+            </select>
+            <select id="ctl-stack" aria-label="Stack" hidden>
+              <option>React + Node.js (NestJS) + PostgreSQL</option>
+              <option>React + Go + PostgreSQL</option>
+              <option>Angular + Java (Spring) + PostgreSQL</option>
+              <option>Python (FastAPI) + React + PostgreSQL</option>
+            </select>
+            <select id="ctl-agenttools" aria-label="Agent tools" hidden>
+              <option>Knowledge retrieval (RAG)</option>
+              <option>Web + document tools</option>
+              <option>Workflow automation</option>
+              <option>Custom toolset</option>
+            </select>
+            <button class="btn btn-primary btn-sm" id="studio-run">▶ Run</button>
+          </div>
+        </div>
+
+        <div class="studio-body">
+          <!-- Key activation (hidden until needed) -->
+          <div class="card" id="studio-auth" hidden style="cursor:default; margin-bottom:18px;">
+            <h3 style="margin-top:0;">Deployment key required</h3>
+            <p style="font-size:0.87rem;">Studio runs on your ChengetAi AI quota. Don't have a key? <a href="contact.html?enquiry=app&app=ChengetAi+Studio#demo" style="color:var(--green);">Request access →</a></p>
+            <form class="form-grid" id="studio-key-form" style="margin-top:12px;">
+              <div class="field">
+                <input id="studio-key-input" type="password" autocomplete="off" spellcheck="false" placeholder="CHG-XXXX-XXXX-XXXX" required aria-label="Deployment key">
+              </div>
+              <button type="submit" class="btn btn-primary">Activate Key</button>
+              <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem;"></p>
+            </form>
+          </div>
+
+          <textarea class="studio-prompt" id="studio-prompt" placeholder="Describe what you want to build…"></textarea>
+          <div class="studio-actions">
+            <span class="studio-hint" id="studio-hint">e.g. "A Python function that validates Zimbabwean national ID numbers, with tests."</span>
+          </div>
+
+          <div class="studio-output" id="studio-output" hidden>
+            <div class="file-tabs" id="output-files" hidden></div>
+            <pre id="output-code" hidden></pre>
+            <img id="output-image" alt="Generated image" hidden>
+            <div class="studio-actions">
+              <button class="btn btn-ghost btn-sm" id="output-copy" hidden>Copy output</button>
+              <a class="btn btn-ghost btn-sm" id="output-download" hidden download>Download</a>
+            </div>
+          </div>
+
+          <div class="notice" id="studio-notice" hidden style="margin-top:18px;"><span id="studio-notice-text"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT EACH STUDIO DOES -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">The Studios</span>
+      <h2>One workspace, four ways to build</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="card reveal"><div class="card-icon">💻</div><h3>Code Studio</h3><p>Describe a function, script or fix — get working code with explanations, in Python, JavaScript, Go, Java and more.</p></div>
+      <div class="card reveal"><div class="card-icon">🎨</div><h3>Image Studio</h3><p>Generate pictures from text prompts — illustrations, product mock-ups and creative assets, in square, landscape or portrait.</p></div>
+      <div class="card reveal"><div class="card-icon">🏗</div><h3>Full-Stack Studio</h3><p>Describe an application and get a complete project scaffold — frontend, backend, database schema and Docker setup, file by file.</p></div>
+      <div class="card reveal"><div class="card-icon">🤖</div><h3>Agent Studio</h3><p>Design AI agents with goals, tools and guardrails — export ready-to-run agent configurations for the ChengetAi AI platform.</p></div>
+    </div>
+    <p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:30px;">Studio usage draws on your ChengetAi AI plan. Generated code and images belong to you.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Want Studio for your <span class="grad-text">whole team</span>?</h2>
+      <p>Team workspaces, shared history and higher quotas are available on Professional and Enterprise plans.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="contact.html?enquiry=app&app=ChengetAi+Studio#demo">Request Team Access</a>
+        <a class="btn btn-ghost btn-lg" href="pricing.html">View Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+        <p>An African technology company building intelligent digital infrastructure that accelerates education, research, agriculture and enterprise transformation across the continent.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="cloud.html">ChengetAi Cloud</a></li>
+          <li><a href="deploy.html">ChengetAi Deploy</a></li>
+          <li><a href="products.html#dare">Dare Digital Repository</a></li>
+          <li><a href="appstore.html">ChengetAi Store</a></li>
+          <li><a href="studio.html">ChengetAi Studio</a></li>
+          <li><a href="ai.html">ChengetAi AI</a></li>
+          <li><a href="products.html#learn">ChengetAi Learn</a></li>
+          <li><a href="products.html#research">ChengetAi Research</a></li>
+          <li><a href="products.html#agriculture">ChengetAi Agriculture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions.html#universities">Universities</a></li>
+          <li><a href="solutions.html#polytechnics">Polytechnics</a></li>
+          <li><a href="solutions.html#government">Government</a></li>
+          <li><a href="solutions.html#libraries">Libraries</a></li>
+          <li><a href="solutions.html#agriculture">Agriculture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="resources.html">Documentation</a></li>
+          <li><a href="resources.html#guides">Installation Guides</a></li>
+          <li><a href="resources.html#api">API Docs</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portal.html">Customer Portal</a></li>
+          <li><a href="admin.html">Admin Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> ChengetAi Labs. All rights reserved.</span>
+      <span>AI • Cloud • Digital Libraries • Education • Research • Agriculture • Enterprise</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/studio.js"></script>
+</body>
+</html>

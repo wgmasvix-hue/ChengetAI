@@ -112,8 +112,8 @@ h3 { font-size: 1.25rem; }
 
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
 .nav-links a {
-  padding: 8px 13px; border-radius: 8px;
-  font-size: 0.92rem; font-weight: 500; color: var(--text-soft);
+  padding: 8px 10px; border-radius: 8px;
+  font-size: 0.9rem; font-weight: 500; color: var(--text-soft);
   transition: color 0.18s, background 0.18s;
   white-space: nowrap;
 }
@@ -564,4 +564,83 @@ h3 { font-size: 1.25rem; }
   .section { padding: 64px 0; }
   .hero { padding-top: calc(var(--header-h) + 48px); min-height: auto; }
   .metric-row { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- ChengetAi Studio ---------- */
+.studio-shell {
+  display: grid; grid-template-columns: 250px 1fr;
+  gap: 24px; align-items: start;
+}
+.studio-side {
+  background: var(--bg-soft); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 16px 12px;
+  position: sticky; top: calc(var(--header-h) + 20px);
+}
+.studio-side .side-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-dim); padding: 6px 12px 8px;
+}
+.studio-side button {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 11px 14px; border-radius: 10px; border: none; background: none;
+  font-family: var(--font); font-size: 0.92rem; font-weight: 500;
+  color: var(--text-soft); cursor: pointer; text-align: left;
+  transition: background 0.15s, color 0.15s;
+}
+.studio-side button:hover { background: var(--card-hover); color: var(--text); }
+.studio-side button.active { background: rgba(34, 197, 94, 0.12); color: var(--green); }
+
+.studio-main {
+  background: var(--surface); border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.studio-topbar {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+}
+.studio-topbar h2 { font-size: 1.05rem; }
+.studio-topbar .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.studio-topbar select {
+  padding: 8px 12px; background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-strong); border-radius: 8px;
+  color: var(--text); font-family: var(--font); font-size: 0.85rem;
+}
+.studio-topbar select option { background: var(--surface); }
+
+.studio-body { padding: 20px; }
+.studio-prompt {
+  width: 100%; min-height: 110px; resize: vertical;
+  padding: 14px 16px; background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-strong); border-radius: var(--radius-md);
+  color: var(--text); font-family: var(--font); font-size: 0.95rem; line-height: 1.6;
+}
+.studio-prompt:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18); }
+.studio-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.studio-hint { font-size: 0.8rem; color: var(--text-dim); }
+
+.studio-output { margin-top: 20px; }
+.studio-output .console { max-height: 460px; }
+.studio-output pre {
+  background: #04100a; border: 1px solid var(--line-strong); border-radius: var(--radius-md);
+  padding: 18px; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7;
+  overflow: auto; max-height: 460px; white-space: pre-wrap; color: var(--text-soft);
+}
+.studio-output img {
+  border-radius: var(--radius-md); border: 1px solid var(--line-strong);
+  max-height: 520px; margin: 0 auto;
+}
+.file-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.file-tabs button {
+  padding: 6px 12px; border-radius: 7px; cursor: pointer;
+  background: var(--card); border: 1px solid var(--line-strong);
+  color: var(--text-soft); font-family: var(--font-mono); font-size: 0.72rem;
+}
+.file-tabs button.active { border-color: var(--green); color: var(--green); background: rgba(34, 197, 94, 0.08); }
+
+@media (max-width: 900px) {
+  .studio-shell { grid-template-columns: 1fr; }
+  .studio-side { position: static; display: flex; flex-wrap: wrap; gap: 4px; }
+  .studio-side .side-label { width: 100%; }
+  .studio-side button { width: auto; }
 }
