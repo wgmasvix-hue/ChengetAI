@@ -9,6 +9,8 @@
   var API = window.CHENGETAI_API || "https://api.chengetailabs.co.zw/api";
   var TOKEN_KEY = "chengetai_token";
   var KEY_KEY = "chengetai_deploy_key";
+  var MERCHANT_LOCAL = "0784457922";           // ChengetAiLabs EcoCash receiving number
+  var MERCHANT_INTL = "263784457922";
   var POLL_MS = 3000;
   var POLL_TIMEOUT_MS = 2 * 60 * 1000; // EcoCash prompts expire quickly
 
@@ -135,6 +137,20 @@
     }, POLL_MS);
   }
 
+  /* Manual path: customer sends money straight to the ChengetAiLabs
+     EcoCash number, then WhatsApps the confirmation for crediting. */
+  function showManualPay(lead) {
+    var waText = encodeURIComponent(
+      "Hi ChengetAiLabs — I've sent US$" + selected.amount + " by EcoCash to " + MERCHANT_LOCAL +
+      " for the " + selected.pack + " (" + selected.credits.toLocaleString() + " Studio credits)." +
+      " My EcoCash confirmation: [paste SMS here]. My deployment key: " +
+      (credential() ? "[on file]" : "[your key]"));
+    statusText.innerHTML = lead +
+      "<br><br>1️⃣ Dial <b>*151#</b> → Send Money → <b style=\"color:var(--gold);\">" + MERCHANT_LOCAL + "</b> (ChengetAiLabs) → US$" + selected.amount +
+      "<br>2️⃣ <a href=\"https://wa.me/" + MERCHANT_INTL + "?text=" + waText + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--green); font-weight:600;\">WhatsApp us the confirmation →</a> and we credit your account.";
+    statusBox.hidden = false;
+  }
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     resetPanels();
@@ -160,7 +176,8 @@
           amount: selected.amount,
           currency: "USD",
           credits: selected.credits,
-          phone: phone
+          phone: phone,
+          payee: MERCHANT_INTL
         })
       });
       var data = null;
@@ -169,7 +186,7 @@
       if (res.status === 404 || res.status === 405) {
         payBtn.disabled = false;
         statusBox.hidden = true;
-        showErr("Online EcoCash payments are rolling out — please use the contact-form link below and we'll process your order manually.");
+        showManualPay("Automatic checkout is still rolling out — pay manually instead:");
         return;
       }
       if (!res.ok) {
@@ -193,7 +210,7 @@
     } catch (err) {
       payBtn.disabled = false;
       statusBox.hidden = true;
-      showErr("Server unreachable — check your connection, or use the contact-form link below.");
+      showManualPay("We couldn't reach the payment service — pay manually instead:");
     }
   });
 })();

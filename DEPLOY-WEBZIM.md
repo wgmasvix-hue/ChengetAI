@@ -97,6 +97,21 @@ The site works on both HTTP and HTTPS with no changes.
   every 3 s for `status: pending | paid | failed` (include `reference` on
   paid, `message` on failed) and credits the account server-side on
   payment confirmation. Both endpoints need the site origins in CORS.
+  **Receiving number:** all payments flow to the ChengetAiLabs EcoCash line
+  **0784457922** (sent as `payee: "263784457922"` in the request); the manual
+  path shows customers *151# → Send Money → 0784457922 and a WhatsApp link to
+  send proof.
+- **Messages via WhatsApp:** every contact-form submission opens WhatsApp with
+  the composed message addressed to **+263 78 445 7922** — enquiries reach you
+  with no email backend. The number also appears on the contact page and in
+  the payment flows.
+- **Key generator (admin):** after staff sign-in, `admin.html` is a PIN/key
+  generator: it creates `CHG-XXXX-XXXX-XXXX` keys with crypto randomness,
+  registers each via `POST /admin/keys` (`{key, label, credits}`, staff JWT
+  required) so it activates immediately, keeps a local register with CSV
+  export, and shares keys to customers over WhatsApp. If the endpoint isn't
+  live the key is saved locally and clearly marked "Register on server" —
+  a key only works once the API knows it.
 - **Contact form:** the form currently shows a client-side confirmation. To receive
   real messages, point the form at a backend or a form service (e.g. add
   `action="https://formspree.io/f/yourid" method="POST"` to the form in

@@ -49,10 +49,27 @@
     });
   });
 
-  /* Contact / demo forms: client-side confirmation (no backend on the static site) */
+  /* Contact / demo forms: deliver the message to ChengetAiLabs on WhatsApp
+     (+263 78 445 7922) — works with no backend. */
+  var WHATSAPP_INTL = "263784457922";
   document.querySelectorAll("form[data-demo-form]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      var val = function (id) {
+        var el = form.querySelector("#" + id);
+        return el ? el.value.trim() : "";
+      };
+      var topicEl = form.querySelector("#ct-topic");
+      var lines = [
+        "New website enquiry — ChengetAiLabs",
+        "Name: " + val("ct-name"),
+        "Email: " + val("ct-email")
+      ];
+      if (val("ct-org")) lines.push("Organisation: " + val("ct-org"));
+      if (topicEl) lines.push("Type: " + topicEl.options[topicEl.selectedIndex].text);
+      lines.push("", val("ct-msg"));
+      window.open("https://wa.me/" + WHATSAPP_INTL + "?text=" + encodeURIComponent(lines.join("\n")),
+        "_blank", "noopener");
       var ok = form.querySelector(".form-success");
       if (ok) {
         ok.style.display = "flex";

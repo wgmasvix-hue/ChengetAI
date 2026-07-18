@@ -27,7 +27,7 @@ integrates with the live ChengetAi Deploy API at `https://api.chengetailabs.co.z
 | `about.html` | Mission, core values, technology stack |
 | `contact.html` | Contact form: support, sales, partnerships, demo requests |
 | `portal.html` | Customer portal — real API sign-in, live server & deployment data |
-| `admin.html` | Administrator sign-in (console itself runs on the internal network) |
+| `admin.html` | Administrator sign-in + deployment-key (PIN) generator |
 
 ## Structure
 
@@ -42,7 +42,8 @@ assets/js/portal.js    — portal sign-in + live data from the API
 assets/img/logo.svg    — brand mark (gradient shield, rim light + AI spark)
 assets/js/store.js     — community APK listings + submissions (API-backed)
 assets/js/studio.js    — Studio: code/image/full-stack/agent generation client
-assets/js/payments.js  — EcoCash checkout for Studio credit packs
+assets/js/payments.js  — EcoCash checkout (pays to 0784457922)
+assets/js/keys.js      — admin PIN/key generator with WhatsApp delivery
 .htaccess              — Apache config: friendly URLs, caching, security headers
 404.html               — branded error page
 ```

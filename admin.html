@@ -14,7 +14,7 @@
 
 <header class="site-header">
   <div class="container-wide nav-inner">
-    <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>Labs</a>
+    <a class="logo" href="index.html"><span class="mark">C</span><span>Chenget<em>Ai</em>Labs</span></a>
     <nav aria-label="Main navigation">
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -41,7 +41,7 @@
 <!-- ADMIN SIGN IN -->
 <section class="auth-wrap" id="portal-auth">
   <div class="auth-card reveal in">
-    <a class="logo" href="index.html" style="margin-bottom:22px;"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Admin</a>
+    <a class="logo" href="index.html" style="margin-bottom:22px;"><span class="mark">C</span><span>Chenget<em>Ai</em>&nbsp;Admin</span></a>
     <h1>Administrator Portal</h1>
     <p>Internal management interface — ChengetAi Labs staff only.</p>
     <form class="form-grid" id="portal-login">
@@ -60,14 +60,46 @@
   </div>
 </section>
 
-<!-- POST SIGN-IN -->
+<!-- POST SIGN-IN: KEY / PIN GENERATOR -->
 <div class="portal-shell" id="portal-dash" hidden>
-  <main class="portal-main" style="grid-column: 1 / -1; max-width: 720px; margin: 0 auto;">
-    <h1>Authenticated<span id="portal-user"></span></h1>
-    <p class="portal-sub">Your staff credentials were verified against the ChengetAi API.</p>
-    <div class="notice success">
-      🔐 The administrator console — customer management, licenses, device activation, fleet monitoring, deployment history, subscriptions, analytics and audit logs — runs on the internal operations network. Open it from your staff workstation or VPN.
+  <main class="portal-main" style="grid-column: 1 / -1; max-width: 900px; margin: 0 auto;">
+    <h1>Key Generator<span id="portal-user"></span></h1>
+    <p class="portal-sub">Issue deployment keys (PINs) for Deploy and Studio customers. Keys register on the API and can be sent straight to the customer on WhatsApp.</p>
+
+    <div class="card" style="cursor:default;">
+      <h3 style="margin-top:0;">Create a new key</h3>
+      <form class="form-grid" id="key-form">
+        <div class="form-row">
+          <div class="field">
+            <label for="key-label">Customer / Label</label>
+            <input id="key-label" type="text" placeholder="e.g. Great Zimbabwe Polytechnic" required>
+          </div>
+          <div class="field">
+            <label for="key-credits">Starting Credits</label>
+            <input id="key-credits" type="number" min="0" step="1" value="25">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="key-generate">🔑 Generate Key</button>
+        <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem;"></p>
+        <div class="notice" id="key-warn" hidden><span>⚠️ The keys API isn't reachable, so this key is <b>not active yet</b> — it's saved below; register it on the server before giving it out.</span></div>
+      </form>
     </div>
+
+    <div class="mock-window" style="margin-top:22px;">
+      <div class="mock-titlebar"><i></i><i></i><i></i><span>Issued keys — stored on this device</span></div>
+      <div class="mock-body">
+        <table class="mock-table">
+          <thead><tr><th>Label</th><th>Key</th><th>Credits</th><th>Status</th><th></th></tr></thead>
+          <tbody id="key-list">
+            <tr id="key-empty"><td colspan="5" style="color:var(--text-dim);">No keys issued yet — generate your first key above.</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-ghost btn-sm" id="key-export" type="button">⬇ Export CSV</button>
+        </div>
+      </div>
+    </div>
+
     <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
       <a class="btn btn-ghost" href="index.html">Back to Site</a>
       <button class="btn btn-ghost" id="portal-logout" type="button">Sign Out</button>
@@ -79,7 +111,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>Labs</a>
+        <a class="logo" href="index.html"><span class="mark">C</span><span>Chenget<em>Ai</em>Labs</span></a>
         <p>An African technology company building intelligent digital infrastructure that accelerates education, research, agriculture and enterprise transformation across the continent.</p>
       </div>
       <div>
@@ -135,5 +167,6 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/portal.js"></script>
+<script src="assets/js/keys.js"></script>
 </body>
 </html>
