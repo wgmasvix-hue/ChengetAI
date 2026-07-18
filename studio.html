@@ -14,7 +14,7 @@
 
 <header class="site-header">
   <div class="container-wide nav-inner">
-    <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+    <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>Labs</a>
     <nav aria-label="Main navigation">
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -164,7 +164,7 @@
           <li>≈ 100 images</li>
           <li>≈ 50 full-stack scaffolds</li>
         </ul>
-        <a class="btn btn-ghost btn-block" href="contact.html?enquiry=credits&pack=Starter+Pack+%245+·+500+credits#demo">Buy Starter</a>
+        <button type="button" class="btn btn-ghost btn-block buy-pack" data-pack="Starter Pack" data-amount="5" data-credits="500">Buy with EcoCash</button>
       </div>
       <div class="price-card featured reveal">
         <span class="tag" style="align-self:flex-start; margin-bottom:12px;">Best Value</span>
@@ -176,7 +176,7 @@
           <li>Priority generation queue</li>
           <li>Credits valid 12 months</li>
         </ul>
-        <a class="btn btn-primary btn-block" href="contact.html?enquiry=credits&pack=Creator+Pack+%2415+·+2%2C000+credits#demo">Buy Creator</a>
+        <button type="button" class="btn btn-primary btn-block buy-pack" data-pack="Creator Pack" data-amount="15" data-credits="2000">Buy with EcoCash</button>
       </div>
       <div class="price-card reveal">
         <span class="plan-name">Pro Pack</span>
@@ -187,10 +187,27 @@
           <li>Shared team balance</li>
           <li>Usage reports</li>
         </ul>
-        <a class="btn btn-ghost btn-block" href="contact.html?enquiry=credits&pack=Pro+Pack+%2440+·+6%2C000+credits#demo">Buy Pro</a>
+        <button type="button" class="btn btn-ghost btn-block buy-pack" data-pack="Pro Pack" data-amount="40" data-credits="6000">Buy with EcoCash</button>
       </div>
     </div>
-    <p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:24px;">Pay via mobile money, card or invoice — orders are confirmed by our team within one business day. Classrooms and hubs: ask about <a href="contact.html?enquiry=credits&pack=Education+bulk+credits#demo" style="color:var(--green);">education bulk credits</a>.</p>
+    <!-- ECOCASH CHECKOUT -->
+    <div class="card" id="checkout" hidden style="cursor:default; max-width:520px; margin:30px auto 0;">
+      <h3 style="margin-top:0;">📲 Pay with EcoCash</h3>
+      <p style="font-size:0.9rem;">You're buying <b id="co-pack" style="color:var(--text);"></b> — <b id="co-credits" style="color:var(--gold);"></b> credits for <b id="co-amount" style="color:var(--text);"></b>.</p>
+      <form class="form-grid" id="ecocash-form" style="margin-top:14px;">
+        <div class="field">
+          <label for="co-phone">EcoCash Number</label>
+          <input id="co-phone" type="tel" inputmode="tel" placeholder="077 123 4567" autocomplete="tel" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="co-pay">Pay <span id="co-pay-amount"></span> with EcoCash</button>
+        <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem;"></p>
+      </form>
+      <div class="notice" id="co-status" hidden style="margin-top:14px;"><span id="co-status-text"></span></div>
+      <div class="notice success" id="co-success" hidden style="margin-top:14px;">✅ <span id="co-success-text"></span></div>
+      <p style="font-size:0.8rem; color:var(--text-dim); margin-top:14px;">A payment prompt is sent to your phone — approve it with your EcoCash PIN. Trouble paying? <a href="#" id="co-fallback-link" style="color:var(--green);">Order via the contact form instead →</a> <button type="button" id="co-cancel" class="btn btn-ghost btn-sm" style="float:right;">Close</button></p>
+    </div>
+
+    <p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:24px;">Pay via EcoCash right here, or by card or invoice — orders are confirmed by our team within one business day. Classrooms and hubs: ask about <a href="contact.html?enquiry=credits&pack=Education+bulk+credits#demo" style="color:var(--green);">education bulk credits</a>.</p>
   </div>
 </section>
 
@@ -228,7 +245,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>&nbsp;Labs</a>
+        <a class="logo" href="index.html"><span class="mark">C</span>Chenget<em>Ai</em>Labs</a>
         <p>An African technology company building intelligent digital infrastructure that accelerates education, research, agriculture and enterprise transformation across the continent.</p>
       </div>
       <div>
@@ -284,5 +301,6 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/studio.js"></script>
+<script src="assets/js/payments.js"></script>
 </body>
 </html>

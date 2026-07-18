@@ -74,8 +74,16 @@ The site works on both HTTP and HTTPS with no changes.
   (`{balance}`); generation responses may include `credits` (remaining) to
   update the display instantly; return **HTTP 402** with a message when the
   balance is insufficient and the UI prompts a top-up. Credit-pack orders
-  arrive via the contact form ("Studio credits order") until a payment
-  endpoint exists. Grant 25 free credits to each new deployment key.
+  arrive via the contact form ("Studio credits order") as the manual
+  fallback. Grant 25 free credits to each new deployment key.
+  **EcoCash checkout:** the Studio page sells packs directly via
+  `POST /payments/ecocash` with `{pack, amount, currency:"USD", credits,
+  phone}` (phone normalised to `2637[78]XXXXXXX`) → respond
+  `{id, status:"pending"}` after triggering the EcoCash USSD push (via the
+  EcoCash Open API or Paynow). The page then polls `GET /payments/:id`
+  every 3 s for `status: pending | paid | failed` (include `reference` on
+  paid, `message` on failed) and credits the account server-side on
+  payment confirmation. Both endpoints need the site origins in CORS.
 - **Contact form:** the form currently shows a client-side confirmation. To receive
   real messages, point the form at a backend or a form service (e.g. add
   `action="https://formspree.io/f/yourid" method="POST"` to the form in

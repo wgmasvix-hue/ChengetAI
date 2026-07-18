@@ -42,6 +42,7 @@ assets/js/portal.js    — portal sign-in + live data from the API
 assets/img/logo.svg    — brand mark (gradient shield, rim light + AI spark)
 assets/js/store.js     — community APK listings + submissions (API-backed)
 assets/js/studio.js    — Studio: code/image/full-stack/agent generation client
+assets/js/payments.js  — EcoCash checkout for Studio credit packs
 .htaccess              — Apache config: friendly URLs, caching, security headers
 404.html               — branded error page
 ```
