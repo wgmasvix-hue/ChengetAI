@@ -69,6 +69,13 @@ The site works on both HTTP and HTTPS with no changes.
   `POST /ai/agents` (`{prompt, tools}` → `{agent}` text/YAML). Until these
   endpoints are live, the page shows a truthful "rolling out" notice with an
   early-access link — no fake output.
+  **Credits:** Studio is credit-metered (code 1 · agent 2 · image 5 ·
+  full-stack 10). The page reads the balance from `GET /ai/credits`
+  (`{balance}`); generation responses may include `credits` (remaining) to
+  update the display instantly; return **HTTP 402** with a message when the
+  balance is insufficient and the UI prompts a top-up. Credit-pack orders
+  arrive via the contact form ("Studio credits order") until a payment
+  endpoint exists. Grant 25 free credits to each new deployment key.
 - **Contact form:** the form currently shows a client-side confirmation. To receive
   real messages, point the form at a backend or a form service (e.g. add
   `action="https://formspree.io/f/yourid" method="POST"` to the form in

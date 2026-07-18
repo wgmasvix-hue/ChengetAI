@@ -84,6 +84,13 @@
         msgField.value = "I would like to rent a cloud server — plan: " + plan + ".\n" +
           "Preferred region: \nOperating system: \nManaged or root access: \nBilling: monthly / annual";
       }
+    } else if (enquiry === "credits") {
+      selectTopic("Studio credits order");
+      var pack = params.get("pack");
+      if (pack && msgField && !msgField.value) {
+        msgField.value = "I would like to buy Studio credits — pack: " + pack + ".\n" +
+          "Payment method (mobile money / card / invoice): \nDeployment key (if you have one): ";
+      }
     } else if (enquiry === "app") {
       selectTopic("App Store enquiry");
       if (app && msgField && !msgField.value) {

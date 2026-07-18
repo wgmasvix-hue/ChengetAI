@@ -8,6 +8,8 @@
   var TOKEN_KEY = "chengetai_token";
   var KEY_KEY = "chengetai_deploy_key";
 
+  var COSTS = { code: 1, agent: 2, image: 5, fullstack: 10 };
+
   var STUDIOS = {
     code: {
       title: "💻 Code Studio", endpoint: "/ai/code", controls: ["ctl-language"],
@@ -62,6 +64,30 @@
     keyLabel.textContent = hasCredential() ? "Key active" : "Activate key";
   }
 
+  /* ---------- Credits ---------- */
+
+  var creditsBox = document.getElementById("studio-credits");
+  var creditsValue = document.getElementById("studio-credits-value");
+  var costEl = document.getElementById("studio-cost");
+
+  function showBalance(balance) {
+    if (balance == null || isNaN(Number(balance))) return;
+    creditsValue.textContent = Number(balance).toLocaleString();
+    creditsBox.hidden = false;
+  }
+
+  async function loadCredits() {
+    if (!hasCredential() || !creditsBox) return;
+    try {
+      var res = await fetch(API + "/ai/credits", {
+        headers: { Authorization: "Bearer " + getCredential() }
+      });
+      if (!res.ok) return; // endpoint not live yet — keep the balance hidden
+      var data = await res.json();
+      showBalance(data && (data.balance != null ? data.balance : data.credits));
+    } catch (e) { /* balance is optional */ }
+  }
+
   async function activateKey(key) {
     key = key.trim();
     if (!key) throw new Error("Enter your deployment key.");
@@ -98,6 +124,7 @@
       await activateKey(document.getElementById("studio-key-input").value);
       authBox.hidden = true;
       refreshKeyLabel();
+      loadCredits();
     } catch (err) {
       errEl.textContent = err.message;
       errEl.style.display = "block";
@@ -119,6 +146,7 @@
       var s = STUDIOS[current];
       titleEl.textContent = s.title;
       hintEl.textContent = s.hint;
+      costEl.textContent = COSTS[current] + (COSTS[current] === 1 ? " credit" : " credits") + " / run";
       promptEl.placeholder = s.placeholder;
       ALL_CONTROLS.forEach(function (id) {
         document.getElementById(id).hidden = s.controls.indexOf(id) === -1;
@@ -231,6 +259,11 @@
         showNotice((data && (data.message || data.error)) || "Your session expired — activate your deployment key again.");
         return;
       }
+      if (res.status === 402) {
+        showNotice('Not enough credits for this run (' + COSTS[current] + ' needed). <a href="#credits" style="color:var(--green); font-weight:600;">Top up your credits →</a>');
+        loadCredits();
+        return;
+      }
       if (res.status === 404 || res.status === 405) {
         showNotice('This studio\'s backend isn\'t live yet — Studio is rolling out. <a href="contact.html?enquiry=app&app=ChengetAi+Studio#demo" style="color:var(--green);">Join the early-access list →</a>');
         return;
@@ -238,6 +271,12 @@
       if (!res.ok) {
         showNotice((data && (data.message || data.error)) || "Generation failed (HTTP " + res.status + "). Please try again.");
         return;
+      }
+
+      if (data && (data.credits != null || data.creditsRemaining != null || data.balance != null)) {
+        showBalance(data.credits != null ? data.credits : (data.creditsRemaining != null ? data.creditsRemaining : data.balance));
+      } else {
+        loadCredits();
       }
 
       if (current === "image") {
@@ -270,4 +309,5 @@
   });
 
   refreshKeyLabel();
+  loadCredits();
 })();

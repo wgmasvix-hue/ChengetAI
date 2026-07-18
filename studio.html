@@ -43,11 +43,15 @@
     <nav class="breadcrumb"><a href="index.html">Home</a> / <b>ChengetAi Studio</b></nav>
     <span class="eyebrow">ChengetAi Studio</span>
     <h1>Build with AI, <span class="grad-text">right in your browser</span></h1>
-    <p class="lead">Four studios, one workspace: generate code, create images, scaffold full-stack applications and design AI agents — powered by the ChengetAi AI platform, gated by your deployment key.</p>
+    <p class="lead">Four studios, one workspace: generate code, create images, scaffold full-stack applications and design AI agents. Studio runs on simple pay-as-you-go credits — every new key starts with <b style="color:var(--text);">25 free credits</b>.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#workspace">Open the Workspace</a>
+      <a class="btn btn-ghost" href="#credits">⚡ Buy Credits</a>
+    </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="workspace">
   <div class="container-wide">
     <div class="studio-shell">
 
@@ -60,6 +64,8 @@
         <button data-studio="agent">🤖 Agent Studio</button>
         <div class="side-label" style="margin-top:14px;">Session</div>
         <button id="studio-key-btn" type="button">🔑 <span id="studio-key-label">Activate key</span></button>
+        <div id="studio-credits" style="padding:10px 14px; font-size:0.85rem; color:var(--text-soft);" hidden>⚡ <b id="studio-credits-value" style="color:var(--gold);"></b> credits</div>
+        <a href="#credits" style="display:block; padding:10px 14px; font-size:0.85rem; color:var(--green); font-weight:600;">＋ Buy credits</a>
       </aside>
 
       <!-- WORKSPACE -->
@@ -88,6 +94,7 @@
               <option>Workflow automation</option>
               <option>Custom toolset</option>
             </select>
+            <span class="studio-hint" id="studio-cost" style="white-space:nowrap;">1 credit / run</span>
             <button class="btn btn-primary btn-sm" id="studio-run">▶ Run</button>
           </div>
         </div>
@@ -128,20 +135,79 @@
   </div>
 </section>
 
+<!-- CREDITS -->
+<section class="section section-alt" id="credits">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Studio Credits</span>
+      <h2>Pay for what you create — nothing more</h2>
+      <p>Credits never lock you into a subscription. Buy a pack, create, top up when you need more. Code costs 1 credit, agents 2, images 5 and full-stack scaffolds 10.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <span class="plan-name">Trial</span>
+        <span class="plan-for">Every new deployment key</span>
+        <div class="price">Free</div>
+        <ul class="feature-list">
+          <li>25 credits included</li>
+          <li>All four studios</li>
+          <li>No card required</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="contact.html?enquiry=app&app=ChengetAi+Studio#demo">Get a Key</a>
+      </div>
+      <div class="price-card reveal">
+        <span class="plan-name">Starter Pack</span>
+        <span class="plan-for">Trying things out</span>
+        <div class="price">$5<small> · 500 credits</small></div>
+        <ul class="feature-list">
+          <li>≈ 500 code generations</li>
+          <li>≈ 100 images</li>
+          <li>≈ 50 full-stack scaffolds</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="contact.html?enquiry=credits&pack=Starter+Pack+%245+·+500+credits#demo">Buy Starter</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="tag" style="align-self:flex-start; margin-bottom:12px;">Best Value</span>
+        <span class="plan-name">Creator Pack</span>
+        <span class="plan-for">Regular builders</span>
+        <div class="price">$15<small> · 2,000 credits</small></div>
+        <ul class="feature-list">
+          <li>25% more credits per dollar</li>
+          <li>Priority generation queue</li>
+          <li>Credits valid 12 months</li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="contact.html?enquiry=credits&pack=Creator+Pack+%2415+·+2%2C000+credits#demo">Buy Creator</a>
+      </div>
+      <div class="price-card reveal">
+        <span class="plan-name">Pro Pack</span>
+        <span class="plan-for">Studios &amp; agencies</span>
+        <div class="price">$40<small> · 6,000 credits</small></div>
+        <ul class="feature-list">
+          <li>50% more credits per dollar</li>
+          <li>Shared team balance</li>
+          <li>Usage reports</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="contact.html?enquiry=credits&pack=Pro+Pack+%2440+·+6%2C000+credits#demo">Buy Pro</a>
+      </div>
+    </div>
+    <p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:24px;">Pay via mobile money, card or invoice — orders are confirmed by our team within one business day. Classrooms and hubs: ask about <a href="contact.html?enquiry=credits&pack=Education+bulk+credits#demo" style="color:var(--green);">education bulk credits</a>.</p>
+  </div>
+</section>
+
 <!-- WHAT EACH STUDIO DOES -->
-<section class="section section-alt">
+<section class="section">
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow">The Studios</span>
       <h2>One workspace, four ways to build</h2>
     </div>
     <div class="grid grid-4">
-      <div class="card reveal"><div class="card-icon">💻</div><h3>Code Studio</h3><p>Describe a function, script or fix — get working code with explanations, in Python, JavaScript, Go, Java and more.</p></div>
-      <div class="card reveal"><div class="card-icon">🎨</div><h3>Image Studio</h3><p>Generate pictures from text prompts — illustrations, product mock-ups and creative assets, in square, landscape or portrait.</p></div>
-      <div class="card reveal"><div class="card-icon">🏗</div><h3>Full-Stack Studio</h3><p>Describe an application and get a complete project scaffold — frontend, backend, database schema and Docker setup, file by file.</p></div>
-      <div class="card reveal"><div class="card-icon">🤖</div><h3>Agent Studio</h3><p>Design AI agents with goals, tools and guardrails — export ready-to-run agent configurations for the ChengetAi AI platform.</p></div>
+      <div class="card reveal"><div class="card-icon">💻</div><h3>Code Studio</h3><span class="tag gold" style="margin:6px 0 8px; display:inline-block;">1 credit / run</span><p>Describe a function, script or fix — get working code with explanations, in Python, JavaScript, Go, Java and more.</p></div>
+      <div class="card reveal"><div class="card-icon">🎨</div><h3>Image Studio</h3><span class="tag gold" style="margin:6px 0 8px; display:inline-block;">5 credits / run</span><p>Generate pictures from text prompts — illustrations, product mock-ups and creative assets, in square, landscape or portrait.</p></div>
+      <div class="card reveal"><div class="card-icon">🏗</div><h3>Full-Stack Studio</h3><span class="tag gold" style="margin:6px 0 8px; display:inline-block;">10 credits / run</span><p>Describe an application and get a complete project scaffold — frontend, backend, database schema and Docker setup, file by file.</p></div>
+      <div class="card reveal"><div class="card-icon">🤖</div><h3>Agent Studio</h3><span class="tag gold" style="margin:6px 0 8px; display:inline-block;">2 credits / run</span><p>Design AI agents with goals, tools and guardrails — export ready-to-run agent configurations for the ChengetAi AI platform.</p></div>
     </div>
-    <p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:30px;">Studio usage draws on your ChengetAi AI plan. Generated code and images belong to you.</p>
+    <p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:30px;">Generated code and images belong to you — use them commercially, no strings attached.</p>
   </div>
 </section>
 
