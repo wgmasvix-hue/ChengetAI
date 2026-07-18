@@ -6,14 +6,27 @@ Apache/cPanel host, including WebZim shared hosting.
 ## What to upload
 
 Use the ready-made package **`dist/chengetai-website-webzim.zip`** (in this repository),
-or upload these items from the repository root:
+or upload these items from the repository root — **31 files in total**:
 
 ```
-index.html            products.html   cloud.html     deploy.html
-ai.html               solutions.html  research.html  pricing.html
-resources.html        about.html      contact.html   portal.html
-admin.html            404.html        .htaccess      assets/
+16 pages:   index.html  products.html  appstore.html  studio.html  cloud.html
+            deploy.html  ai.html  solutions.html  research.html  pricing.html
+            resources.html  about.html  contact.html  portal.html  admin.html
+            404.html
+1 config:   .htaccess          (hidden file — see note below!)
+1 guide:    DEPLOY-WEBZIM.md   (this file; optional on the server)
+13 assets:  assets/css/  (2)   assets/fonts/  (3)   assets/img/  (1)
+            assets/js/   (7)
 ```
+
+A `MANIFEST.txt` inside the zip lists every file — compare it against your
+extracted folder if anything looks missing.
+
+> ⚠️ **If the file count looks short after extracting:** `.htaccess` starts with
+> a dot, so cPanel File Manager, Windows Explorer and macOS Finder hide it by
+> default. In cPanel, open **Settings → Show Hidden Files (dotfiles)**. The site
+> will load without it, but friendly URLs, caching and security headers won't
+> work until it's there.
 
 ## Steps (cPanel File Manager)
 
