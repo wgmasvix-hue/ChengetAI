@@ -43,9 +43,9 @@
     <nav class="breadcrumb"><a href="index.html">Home</a> / <b>ChengetAi Studio</b></nav>
     <span class="eyebrow">ChengetAi Studio</span>
     <h1>Build with AI, <span class="grad-text">right in your browser</span></h1>
-    <p class="lead">Four studios, one workspace: generate code, create images, scaffold full-stack applications and design AI agents. Studio runs on simple pay-as-you-go credits — every new key starts with <b style="color:var(--text);">25 free credits</b>.</p>
+    <p class="lead">Four studios, one workspace: generate code, create images, scaffold full-stack applications and design AI agents. Studio runs on simple pay-as-you-go credits — sign up free and start with <b style="color:var(--text);">25 free credits</b>.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#workspace">Open the Workspace</a>
+      <button type="button" class="btn btn-primary open-signup">🎁 Try Studio Free</button>
       <a class="btn btn-ghost" href="#credits">⚡ Buy Credits</a>
     </div>
   </div>
@@ -100,11 +100,44 @@
         </div>
 
         <div class="studio-body">
-          <!-- Key activation (hidden until needed) -->
+          <!-- Auth: free trial sign-up, sign-in, or key (hidden until needed) -->
           <div class="card" id="studio-auth" hidden style="cursor:default; margin-bottom:18px;">
-            <h3 style="margin-top:0;">Deployment key required</h3>
-            <p style="font-size:0.87rem;">Studio runs on your ChengetAi AI quota. Don't have a key? <a href="contact.html?enquiry=app&app=ChengetAi+Studio#demo" style="color:var(--green);">Request access →</a></p>
-            <form class="form-grid" id="studio-key-form" style="margin-top:12px;">
+            <div class="tabs" id="auth-tabs" style="margin-bottom:16px;">
+              <button type="button" class="tab-btn active" data-auth="register">🎁 Try Free</button>
+              <button type="button" class="tab-btn" data-auth="login">Sign In</button>
+              <button type="button" class="tab-btn" data-auth="key">🔑 Use a Key</button>
+            </div>
+
+            <form class="form-grid" id="studio-reg-form">
+              <p style="font-size:0.87rem;">Create a free account and get <b style="color:var(--gold);">25 free credits</b> to try every studio — no card, no key needed.</p>
+              <div class="form-row">
+                <div class="field">
+                  <input id="st-reg-email" type="email" autocomplete="email" placeholder="you@example.com" required aria-label="Email">
+                </div>
+                <div class="field">
+                  <input id="st-reg-pass" type="password" autocomplete="new-password" minlength="8" placeholder="Choose a password (8+ chars)" required aria-label="Password">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">🎁 Start Free — 25 Credits</button>
+              <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem;"></p>
+            </form>
+
+            <form class="form-grid" id="studio-login-form" hidden>
+              <p style="font-size:0.87rem;">Welcome back — sign in to pick up your balance.</p>
+              <div class="form-row">
+                <div class="field">
+                  <input id="st-log-email" type="email" autocomplete="email" placeholder="you@example.com" required aria-label="Email">
+                </div>
+                <div class="field">
+                  <input id="st-log-pass" type="password" autocomplete="current-password" placeholder="Password" required aria-label="Password">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+              <p class="login-error" style="display:none; color:#f87171; font-size:0.85rem;"></p>
+            </form>
+
+            <form class="form-grid" id="studio-key-form" hidden>
+              <p style="font-size:0.87rem;">Institutions and Deploy customers: activate the key issued by ChengetAiLabs.</p>
               <div class="field">
                 <input id="studio-key-input" type="password" autocomplete="off" spellcheck="false" placeholder="CHG-XXXX-XXXX-XXXX" required aria-label="Deployment key">
               </div>
@@ -146,14 +179,14 @@
     <div class="pricing-grid">
       <div class="price-card reveal">
         <span class="plan-name">Trial</span>
-        <span class="plan-for">Every new deployment key</span>
+        <span class="plan-for">Every new account</span>
         <div class="price">Free</div>
         <ul class="feature-list">
           <li>25 credits included</li>
           <li>All four studios</li>
-          <li>No card required</li>
+          <li>No card, no key — just sign up</li>
         </ul>
-        <a class="btn btn-ghost btn-block" href="contact.html?enquiry=app&app=ChengetAi+Studio#demo">Get a Key</a>
+        <button type="button" class="btn btn-primary btn-block open-signup">Start Free</button>
       </div>
       <div class="price-card reveal">
         <span class="plan-name">Starter Pack</span>

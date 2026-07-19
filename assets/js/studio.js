@@ -51,6 +51,9 @@
   var noticeText = document.getElementById("studio-notice-text");
   var authBox = document.getElementById("studio-auth");
   var keyForm = document.getElementById("studio-key-form");
+  var regForm = document.getElementById("studio-reg-form");
+  var loginForm = document.getElementById("studio-login-form");
+  var authTabs = document.getElementById("auth-tabs");
   var keyLabel = document.getElementById("studio-key-label");
 
   var current = "code";
@@ -61,7 +64,8 @@
   function hasCredential() { return !!getCredential(); }
 
   function refreshKeyLabel() {
-    keyLabel.textContent = hasCredential() ? "Key active" : "Activate key";
+    keyLabel.textContent = localStorage.getItem(TOKEN_KEY) && !localStorage.getItem(KEY_KEY)
+      ? "Signed in" : (hasCredential() ? "Key active" : "Sign in / key");
   }
 
   /* ---------- Credits ---------- */
@@ -116,6 +120,90 @@
     localStorage.setItem(KEY_KEY, key); // direct-key mode; the next request judges it
   }
 
+  /* ---- Free trial: self-serve account sign-up & sign-in ---- */
+
+  var AUTH_FORMS = { register: regForm, login: loginForm, key: keyForm };
+
+  function showAuth(mode) {
+    authBox.hidden = false;
+    authTabs.querySelectorAll(".tab-btn").forEach(function (b) {
+      b.classList.toggle("active", b.dataset.auth === mode);
+    });
+    Object.keys(AUTH_FORMS).forEach(function (k) { AUTH_FORMS[k].hidden = k !== mode; });
+    var first = AUTH_FORMS[mode].querySelector("input");
+    if (first) first.focus();
+  }
+
+  authTabs.querySelectorAll(".tab-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () { showAuth(btn.dataset.auth); });
+  });
+
+  document.querySelectorAll(".open-signup").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.getElementById("workspace").scrollIntoView({ behavior: "smooth" });
+      showAuth("register");
+    });
+  });
+
+  async function accountAuth(path, email, password, missingMsg) {
+    var res;
+    try {
+      res = await fetch(API + path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, password: password })
+      });
+    } catch (e) {
+      throw new Error("Server unreachable — check your connection and try again.");
+    }
+    var data = null;
+    try { data = await res.json(); } catch (_) {}
+    if (res.status === 404 || res.status === 405) throw new Error(missingMsg);
+    if (!res.ok) {
+      throw new Error((data && (data.message || data.error)) || "Request failed (HTTP " + res.status + ")");
+    }
+    var token = data && (data.token || data.accessToken || data.access_token ||
+      (data.data && (data.data.token || data.data.accessToken)));
+    if (!token) throw new Error("The server responded without a session token — please try again.");
+    localStorage.setItem(TOKEN_KEY, token);
+  }
+
+  function wireAccountForm(form, path, btnLabel, missingMsg) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      var errEl = form.querySelector(".login-error");
+      var btn = form.querySelector('button[type="submit"]');
+      errEl.style.display = "none";
+      btn.disabled = true;
+      var label = btn.textContent;
+      btn.textContent = "Working…";
+      try {
+        await accountAuth(path,
+          form.querySelector('input[type="email"]').value.trim(),
+          form.querySelector('input[type="password"]').value,
+          missingMsg);
+        authBox.hidden = true;
+        refreshKeyLabel();
+        loadCredits();
+        notice.hidden = true;
+      } catch (err) {
+        errEl.innerHTML = err.message === "__rollout__"
+          ? 'Free sign-up is rolling out — get a free key instantly on <a href="https://wa.me/263784457922?text=' +
+            encodeURIComponent("Hi ChengetAiLabs — please send me a free Studio trial key (25 credits).") +
+            '" target="_blank" rel="noopener" style="color:var(--green); font-weight:600;">WhatsApp →</a>'
+          : err.message;
+        errEl.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  }
+
+  wireAccountForm(regForm, "/auth/register", "Start Free", "__rollout__");
+  wireAccountForm(loginForm, "/auth/login", "Sign In",
+    "Sign-in isn't available right now — try the Use a Key tab or WhatsApp us on +263 78 445 7922.");
+
   keyForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     var errEl = keyForm.querySelector(".login-error");
@@ -132,8 +220,7 @@
   });
 
   document.getElementById("studio-key-btn").addEventListener("click", function () {
-    authBox.hidden = false;
-    document.getElementById("studio-key-input").focus();
+    showAuth("key");
   });
 
   /* ---------- Studio switching ---------- */
@@ -232,7 +319,7 @@
     var prompt = promptEl.value.trim();
     notice.hidden = true;
     if (!prompt) { showNotice("Type a prompt first — describe what you want to build."); return; }
-    if (!hasCredential()) { authBox.hidden = false; document.getElementById("studio-key-input").focus(); return; }
+    if (!hasCredential()) { showAuth("register"); return; }
 
     var s = STUDIOS[current];
     var body = { prompt: prompt };
@@ -256,7 +343,7 @@
       if (res.status === 401 || res.status === 403) {
         localStorage.removeItem(TOKEN_KEY);
         authBox.hidden = false;
-        showNotice((data && (data.message || data.error)) || "Your session expired — activate your deployment key again.");
+        showNotice((data && (data.message || data.error)) || "Your session expired — sign in again to continue.");
         return;
       }
       if (res.status === 402) {

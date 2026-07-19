@@ -82,6 +82,13 @@ The site works on both HTTP and HTTPS with no changes.
   `POST /ai/agents` (`{prompt, tools}` → `{agent}` text/YAML). Until these
   endpoints are live, the page shows a truthful "rolling out" notice with an
   early-access link — no fake output.
+  **Free trial accounts:** visitors can try Studio without a key — the page
+  offers self-serve sign-up at `POST /auth/register` (`{email, password}` →
+  `{token}`, HTTP 409 with a message if the email exists, 422 for weak
+  passwords) — grant each new account **25 free credits** server-side. The
+  same panel signs existing users in via `POST /auth/login` and still accepts
+  admin-issued keys. Until the register endpoint is live, sign-up shows a
+  WhatsApp link to request a free trial key instead.
   **Credits:** Studio is credit-metered (code 1 · agent 2 · image 5 ·
   full-stack 10). The page reads the balance from `GET /ai/credits`
   (`{balance}`); generation responses may include `credits` (remaining) to

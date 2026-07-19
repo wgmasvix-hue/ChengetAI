@@ -16,7 +16,7 @@ integrates with the live ChengetAi Deploy API at `https://api.chengetailabs.co.z
 | `index.html` | Homepage — animated connected-globe hero, ecosystem, industries |
 | `products.html` | All seven products: Cloud, Deploy, Dare, AI, Learn, Research, Agriculture |
 | `appstore.html` | **ChengetAi Store** — SkillMatch featured, searchable catalogue, community APK listings + developer submissions |
-| `studio.html` | **ChengetAi Studio** — credit-metered AI workspace: code, image, full-stack scaffold and agent generation |
+| `studio.html` | **ChengetAi Studio** — free-trial sign-up (25 credits), credit-metered AI workspace: code, image, full-stack, agents |
 | `cloud.html` | ChengetAi Cloud — dashboard showcase and capabilities |
 | `deploy.html` | ChengetAi Deploy — **live deployments via the API** (key-gated) |
 | `ai.html` | ChengetAi AI — assistants, RAG, chatbots, document intelligence |
