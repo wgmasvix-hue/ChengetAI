@@ -1,38 +1,42 @@
-ChengetAiLabs website package — file manifest
-Generated: 2026-07-18
+ChengetAI enterprise website — file manifest
+Generated: 2026-07-22
 
-index.html                                    15291 bytes
-products.html                                 16333 bytes
-appstore.html                                 18601 bytes
-studio.html                                   17203 bytes
-cloud.html                                    11748 bytes
-deploy.html                                   10519 bytes
-ai.html                                       10200 bytes
-solutions.html                                12083 bytes
-research.html                                  8797 bytes
-pricing.html                                  10675 bytes
-resources.html                                11546 bytes
-about.html                                    10396 bytes
-contact.html                                   8713 bytes
-portal.html                                    7400 bytes
-admin.html                                     8102 bytes
+index.html                                    17419 bytes
+platform.html                                 16827 bytes
+solutions.html                                21282 bytes
+industries.html                                9876 bytes
+products.html                                 14597 bytes
+pricing.html                                  11919 bytes
+resources.html                                13144 bytes
+about.html                                    11967 bytes
+contact.html                                  11589 bytes
+appstore.html                                 20260 bytes
+studio.html                                   20856 bytes
+cloud.html                                    13362 bytes
+deploy.html                                   12113 bytes
+ai.html                                       11832 bytes
+research.html                                 10301 bytes
+portal.html                                    8906 bytes
+admin.html                                     9532 bytes
 404.html                                        908 bytes
+privacy.html                                   8146 bytes
+terms.html                                     8152 bytes
 .htaccess                                      1315 bytes
-DEPLOY-WEBZIM.md                               6967 bytes
-assets/css/style.css                          28053 bytes
+DEPLOY-WEBZIM.md                               7476 bytes
+assets/css/style.css                          37240 bytes
 assets/css/fonts.css                            574 bytes
 assets/fonts/Inter-var.woff2                  48256 bytes
 assets/fonts/Sora-var.woff2                   25284 bytes
 assets/fonts/JetBrainsMono-var.woff2          31432 bytes
 assets/img/logo.svg                            1699 bytes
-assets/js/main.js                              7153 bytes
+assets/js/main.js                              8766 bytes
 assets/js/globe.js                             5641 bytes
 assets/js/deploy.js                           17907 bytes
 assets/js/portal.js                            6798 bytes
 assets/js/store.js                             5801 bytes
-assets/js/studio.js                           12850 bytes
+assets/js/studio.js                           16398 bytes
 assets/js/payments.js                          9075 bytes
 assets/js/keys.js                              6842 bytes
 
-Total: 32 files (+ this manifest). NOTE: .htaccess is a hidden dotfile —
+20 pages + 16 assets (+ this manifest). NOTE: .htaccess is a hidden dotfile —
 enable 'Show Hidden Files' in cPanel File Manager to see it.

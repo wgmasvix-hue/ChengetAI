@@ -1,6 +1,21 @@
-/* ChengetAi Labs — shared site behaviour */
+/* ChengetAI — shared site behaviour */
 (function () {
   "use strict";
+
+  /* Theme toggle (light / dark) — no-flash init runs inline in <head> */
+  var themeBtn = document.getElementById("theme-toggle");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var root = document.documentElement;
+      var current = root.getAttribute("data-theme");
+      if (!current) {
+        current = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      var next = current === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("chengetai_theme", next); } catch (e) { /* private mode */ }
+    });
+  }
 
   /* Mobile nav toggle */
   var toggle = document.querySelector(".nav-toggle");
@@ -113,6 +128,26 @@
       if (app && msgField && !msgField.value) {
         msgField.value = "I'm interested in " + app + " from the ChengetAi App Store.\n" +
           "Organisation type: \nIntended use: ";
+      }
+    } else if (enquiry === "demo") {
+      selectTopic("Demo request");
+      if (msgField && !msgField.value) {
+        msgField.value = "I'd like to book a demo of ChengetAI.\n" +
+          "Organisation: \nSector: \nWhat we want to solve: \nPreferred time: ";
+      }
+    } else if (enquiry === "sales") {
+      selectTopic("Sales");
+      if (msgField && !msgField.value) {
+        msgField.value = "I'd like a quote for ChengetAI" + (plan ? " — " + plan + " plan" : "") + ".\n" +
+          "Organisation: \nApproximate users: \nDeployment (on-prem / private / hybrid / public): ";
+      }
+    } else if (enquiry === "support") {
+      selectTopic("Support");
+    } else if (enquiry === "partnership") {
+      selectTopic("Partnership enquiry");
+      if (msgField && !msgField.value) {
+        msgField.value = "We'd like to explore a partnership with ChengetAI.\n" +
+          "Organisation: \nPartnership type (reseller / integrator / NGO / research / careers): ";
       }
     }
   }
