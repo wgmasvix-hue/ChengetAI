@@ -152,6 +152,19 @@
     }
   }
 
+  /* Dare repository search — sends the query straight to the live DSpace
+     instance at dspace.dare.co.zw (no backend needed). */
+  var DARE_BASE = "https://dspace.dare.co.zw";
+  document.querySelectorAll("form[data-dare-search]").forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type="search"], input');
+      var q = input ? input.value.trim() : "";
+      var url = q ? DARE_BASE + "/search?query=" + encodeURIComponent(q) : DARE_BASE + "/";
+      window.open(url, "_blank", "noopener");
+    });
+  });
+
   /* App Store: search + category filter */
   var appGrid = document.getElementById("app-grid");
   if (appGrid) {

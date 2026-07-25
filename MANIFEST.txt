@@ -1,42 +1,45 @@
 ChengetAI enterprise website — file manifest
-Generated: 2026-07-22
+Generated: 2026-07-25
 
-index.html                                    17419 bytes
-platform.html                                 16827 bytes
-solutions.html                                21282 bytes
-industries.html                                9876 bytes
-products.html                                 14597 bytes
-pricing.html                                  11919 bytes
-resources.html                                13144 bytes
-about.html                                    11967 bytes
-contact.html                                  11589 bytes
-appstore.html                                 20260 bytes
-studio.html                                   20856 bytes
-cloud.html                                    13362 bytes
-deploy.html                                   12113 bytes
-ai.html                                       11832 bytes
-research.html                                 10301 bytes
-portal.html                                    8906 bytes
-admin.html                                     9532 bytes
-404.html                                        908 bytes
-privacy.html                                   8146 bytes
-terms.html                                     8152 bytes
-.htaccess                                      1315 bytes
-DEPLOY-WEBZIM.md                               7476 bytes
-assets/css/style.css                          37240 bytes
-assets/css/fonts.css                            574 bytes
-assets/fonts/Inter-var.woff2                  48256 bytes
-assets/fonts/Sora-var.woff2                   25284 bytes
-assets/fonts/JetBrainsMono-var.woff2          31432 bytes
-assets/img/logo.svg                            1699 bytes
-assets/js/main.js                              8766 bytes
-assets/js/globe.js                             5641 bytes
-assets/js/deploy.js                           17907 bytes
-assets/js/portal.js                            6798 bytes
-assets/js/store.js                             5801 bytes
-assets/js/studio.js                           16398 bytes
-assets/js/payments.js                          9075 bytes
-assets/js/keys.js                              6842 bytes
-
-20 pages + 16 assets (+ this manifest). NOTE: .htaccess is a hidden dotfile —
-enable 'Show Hidden Files' in cPanel File Manager to see it.
+index.html                                     19647 bytes
+platform.html                                  16818 bytes
+solutions.html                                 21273 bytes
+industries.html                                 9867 bytes
+products.html                                  14715 bytes
+dare.html                                      15275 bytes
+pricing.html                                   11910 bytes
+resources.html                                 13135 bytes
+about.html                                     11958 bytes
+contact.html                                   11580 bytes
+appstore.html                                  20251 bytes
+studio.html                                    20847 bytes
+cloud.html                                     13353 bytes
+deploy.html                                    12104 bytes
+ai.html                                        11823 bytes
+research.html                                  10292 bytes
+portal.html                                     8897 bytes
+admin.html                                      9523 bytes
+404.html                                         908 bytes
+privacy.html                                    8137 bytes
+terms.html                                      8143 bytes
+.htaccess                                       1315 bytes
+DEPLOY-WEBZIM.md                                7476 bytes
+assets/                                         4096 bytes
+assets/css/                                     4096 bytes
+assets/css/fonts.css                             574 bytes
+assets/css/style.css                           37918 bytes
+assets/fonts/                                   4096 bytes
+assets/fonts/Inter-var.woff2                   48256 bytes
+assets/fonts/JetBrainsMono-var.woff2           31432 bytes
+assets/fonts/Sora-var.woff2                    25284 bytes
+assets/img/                                     4096 bytes
+assets/img/logo.svg                             1699 bytes
+assets/js/                                      4096 bytes
+assets/js/deploy.js                            17907 bytes
+assets/js/globe.js                              5641 bytes
+assets/js/keys.js                               6842 bytes
+assets/js/main.js                               9374 bytes
+assets/js/payments.js                           9075 bytes
+assets/js/portal.js                             6798 bytes
+assets/js/store.js                              5801 bytes
+assets/js/studio.js                            16398 bytes

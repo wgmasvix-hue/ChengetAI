@@ -832,3 +832,30 @@ h3 { font-size: 1.25rem; }
 @media (max-width: 640px) {
   .feature-grid, .deploy-grid, .ind-grid, .metric-band { grid-template-columns: 1fr; }
 }
+
+/* ── Dare repository search bar ───────────────────────────── */
+.dare-search {
+  display: flex;
+  gap: 10px;
+  max-width: 620px;
+  margin: 26px 0 4px;
+}
+.dare-search input {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+}
+.dare-search input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.18);
+}
+.dare-search .btn { white-space: nowrap; }
+@media (max-width: 560px) {
+  .dare-search { flex-direction: column; }
+  .dare-search .btn { width: 100%; }
+}
