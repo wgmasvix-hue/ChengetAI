@@ -127,3 +127,26 @@ The site works on both HTTP and HTTPS with no changes.
   (`POST /auth/login` with email/password). The customer portal then renders the
   account's real servers (`GET /servers`) and deployments (`GET /deployments`,
   optional). Nothing on the site is simulated data.
+
+## Search visibility (SEO)
+
+The package now ships with everything search engines and AI answer-engines
+need to surface ChengetAI Labs for AI-service, Koha, DSpace and library-technology
+queries:
+
+- **`robots.txt`** — allows all crawlers (including GPTBot, ClaudeBot,
+  PerplexityBot, Google-Extended, Bingbot, CCBot) and points to the sitemap.
+- **`sitemap.xml`** — lists every public page with priorities.
+- **Structured data (JSON-LD)** — an `Organization` + `WebSite` graph on every
+  page (with both phone numbers), plus `Service` schema on the Deploy and
+  Library Technology pages and a repository entry on the Dare page.
+- **Rich meta** — per-page `keywords`, canonical, Open Graph and Twitter cards,
+  and `robots` directives.
+- **`library-technology.html`** — a dedicated, keyword-optimised page targeting
+  Koha, DSpace, OJS and Moodle searches.
+
+**After uploading:** in Google Search Console (and Bing Webmaster Tools) add the
+domain and submit `https://www.chengetailabs.co.zw/sitemap.xml`. Both `robots.txt`
+and `sitemap.xml` must sit at the site root (`public_html`), which the zip does
+by default. For best social/link previews, replace the SVG `og:image` with a
+1200×630 PNG later.
