@@ -1,0 +1,137 @@
+name: Build Dare Android APK
+
+# Manually triggered: builds the native Dare Android app (mobile/dare-android)
+# on a GitHub-hosted runner, which has full internet access to the Android
+# SDK / Google's Maven repository — unlike the sandbox this app's source was
+# originally written in. Produces real, installable .apk files as workflow
+# artifacts.
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: "What to build"
+        required: true
+        default: "both"
+        type: choice
+        options: [debug, release, both]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        working-directory: mobile/dare-android/android
+        run: chmod +x ./gradlew
+
+      # ── Debug build ────────────────────────────────────────────────────
+      - name: Build debug APK
+        if: ${{ inputs.build_type == 'debug' || inputs.build_type == 'both' }}
+        working-directory: mobile/dare-android/android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Upload debug APK
+        if: ${{ inputs.build_type == 'debug' || inputs.build_type == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dare-debug-apk
+          path: mobile/dare-android/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+      # ── Release build ──────────────────────────────────────────────────
+      # Reuses a keystore from repository secrets if one has been configured
+      # (DARE_KEYSTORE_BASE64 / DARE_KEYSTORE_PASSWORD / DARE_KEY_ALIAS /
+      # DARE_KEY_PASSWORD); otherwise generates a fresh one for this build and
+      # uploads it as an artifact so it can be reused for every future update.
+      - name: Prepare release keystore
+        if: ${{ inputs.build_type == 'release' || inputs.build_type == 'both' }}
+        working-directory: mobile/dare-android/android/app
+        env:
+          EXISTING_KEYSTORE_B64: ${{ secrets.DARE_KEYSTORE_BASE64 }}
+          EXISTING_STORE_PASSWORD: ${{ secrets.DARE_KEYSTORE_PASSWORD }}
+          EXISTING_KEY_ALIAS: ${{ secrets.DARE_KEY_ALIAS }}
+          EXISTING_KEY_PASSWORD: ${{ secrets.DARE_KEY_PASSWORD }}
+        run: |
+          if [ -n "$EXISTING_KEYSTORE_B64" ]; then
+            echo "Reusing existing keystore from repository secrets."
+            echo "$EXISTING_KEYSTORE_B64" | base64 -d > dare-release.keystore
+            echo "STORE_PASSWORD=$EXISTING_STORE_PASSWORD" >> "$GITHUB_ENV"
+            echo "KEY_ALIAS=$EXISTING_KEY_ALIAS" >> "$GITHUB_ENV"
+            echo "KEY_PASSWORD=$EXISTING_KEY_PASSWORD" >> "$GITHUB_ENV"
+            echo "FRESH_KEYSTORE=false" >> "$GITHUB_ENV"
+          else
+            echo "No repository secrets configured — generating a NEW keystore for this build."
+            STORE_PW=$(openssl rand -base64 24)
+            KEY_PW=$(openssl rand -base64 24)
+            echo "::add-mask::$STORE_PW"
+            echo "::add-mask::$KEY_PW"
+            keytool -genkeypair -v -keystore dare-release.keystore -alias dare \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass "$STORE_PW" -keypass "$KEY_PW" \
+              -dname "CN=ChengetAI Labs, OU=Dare, O=ChengetAI Labs, L=Harare, C=ZW"
+            echo "STORE_PASSWORD=$STORE_PW" >> "$GITHUB_ENV"
+            echo "KEY_ALIAS=dare" >> "$GITHUB_ENV"
+            echo "KEY_PASSWORD=$KEY_PW" >> "$GITHUB_ENV"
+            echo "FRESH_KEYSTORE=true" >> "$GITHUB_ENV"
+            {
+              echo "New release keystore generated for the Dare Android app."
+              echo "SAVE THIS FILE AND THE PASSWORDS BELOW SOMEWHERE SAFE."
+              echo ""
+              echo "Store password: $STORE_PW"
+              echo "Key alias:      dare"
+              echo "Key password:   $KEY_PW"
+              echo ""
+              echo "Every future update to this app MUST be signed with this same"
+              echo "keystore, or Android will refuse to install it over the existing"
+              echo "app (users would have to uninstall the old one first)."
+              echo ""
+              echo "To make future workflow runs reuse this identity automatically,"
+              echo "add these as repository secrets (Settings -> Secrets and variables"
+              echo "-> Actions -> New repository secret):"
+              echo "  DARE_KEYSTORE_BASE64   = base64 -w0 dare-release.keystore"
+              echo "  DARE_KEYSTORE_PASSWORD = $STORE_PW"
+              echo "  DARE_KEY_ALIAS         = dare"
+              echo "  DARE_KEY_PASSWORD      = $KEY_PW"
+            } > dare-release-keystore-INFO.txt
+          fi
+
+      - name: Build release APK
+        if: ${{ inputs.build_type == 'release' || inputs.build_type == 'both' }}
+        working-directory: mobile/dare-android/android
+        run: |
+          ./gradlew assembleRelease --no-daemon \
+            -PRELEASE_STORE_FILE=dare-release.keystore \
+            -PRELEASE_STORE_PASSWORD="$STORE_PASSWORD" \
+            -PRELEASE_KEY_ALIAS="$KEY_ALIAS" \
+            -PRELEASE_KEY_PASSWORD="$KEY_PASSWORD"
+
+      - name: Upload release APK
+        if: ${{ inputs.build_type == 'release' || inputs.build_type == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dare-release-apk
+          path: mobile/dare-android/android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+
+      - name: Upload freshly generated keystore (first run only)
+        if: ${{ (inputs.build_type == 'release' || inputs.build_type == 'both') && env.FRESH_KEYSTORE == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dare-release-keystore-SAVE-THIS
+          path: |
+            mobile/dare-android/android/app/dare-release.keystore
+            mobile/dare-android/android/app/dare-release-keystore-INFO.txt
+          if-no-files-found: error

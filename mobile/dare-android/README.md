@@ -4,7 +4,7 @@ A real native Android app (built with [Capacitor](https://capacitorjs.com)) for 
 **Dare Digital Repository**. It's not a shortcut/bookmark: it's a proper app with a
 launcher icon, splash screen, native status bar, native back-button navigation,
 pull-to-refresh, and an offline fallback screen — wrapping the live repository at
-**https://dspace.dare.co.zw**.
+**https://repo.dare.co.zw**.
 
 > **Important — read before building.** This source was generated and hand-edited in
 > a sandboxed environment with no Android SDK and no access to Google's Maven
@@ -19,7 +19,7 @@ pull-to-refresh, and an offline fallback screen — wrapping the live repository
 
 ```
 mobile/dare-android/
-├── capacitor.config.json   # points the app at dspace.dare.co.zw; offline fallback; brand colours
+├── capacitor.config.json   # points the app at repo.dare.co.zw; offline fallback; brand colours
 ├── www/
 │   ├── index.html          # unused at runtime (Capacitor requires a webDir) — see comment inside
 │   └── offline.html        # shown natively whenever the app can't reach the repository
@@ -31,13 +31,14 @@ mobile/dare-android/
 
 ## How it works
 
-- **Content**: `capacitor.config.json` sets `server.url` to `https://dspace.dare.co.zw`,
+- **Content**: `capacitor.config.json` sets `server.url` to `https://repo.dare.co.zw`,
   so the app's WebView loads the live repository directly — there's nothing to keep in
   sync, updates to the site show up in the app immediately.
-- **Scope / external links**: `server.allowNavigation` is scoped to `dspace.dare.co.zw`,
-  `dare.co.zw`, `*.dare.co.zw` and `repo.dare.co.zw`. Links to anything outside that
-  (e.g. a cited external DOI) automatically open in the system browser instead of
-  getting trapped in the app — this is Capacitor's default behaviour, untouched.
+- **Scope / external links**: `server.allowNavigation` is scoped to `dare.co.zw` and
+  `*.dare.co.zw` (covers `repo.dare.co.zw`, `bulawayopolytechnicrepository.dare.co.zw`
+  and any future Dare-network subdomain). Links to anything outside that (e.g. a cited
+  external DOI) automatically open in the system browser instead of getting trapped in
+  the app — this is Capacitor's default behaviour, untouched.
 - **Offline handling**: `server.errorPath` is set to `offline.html`. This is a built-in
   Capacitor mechanism (verified in `node_modules/@capacitor/android/.../Bridge.java`) —
   on any main-frame load failure (no connection, DNS failure, timeout, etc.) the WebView
@@ -49,11 +50,11 @@ mobile/dare-android/
 - **Back button**: handled automatically by Capacitor (navigates WebView history, exits
   the app at the root) — no custom code needed.
 - **Deep links**: `AndroidManifest.xml` declares an App Links intent-filter for
-  `dspace.dare.co.zw`, `dare.co.zw` and `repo.dare.co.zw`, so tapping a Dare link
-  elsewhere on the phone can open directly in the app instead of a browser. For
+  `dare.co.zw` and `*.dare.co.zw`, so tapping a Dare link elsewhere on the phone can
+  open directly in the app instead of a browser. For
   Android to trust this (`android:autoVerify="true"`) without a security warning,
   publish a Digital Asset Links file at
-  `https://dspace.dare.co.zw/.well-known/assetlinks.json` — see
+  `https://repo.dare.co.zw/.well-known/assetlinks.json` — see
   [Google's guide](https://developer.android.com/training/app-links/verify-android-applinks)
   and use the release keystore's SHA-256 fingerprint (from the signing step below).
   The app still works without this — Android just won't auto-verify the link

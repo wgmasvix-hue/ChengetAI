@@ -21,15 +21,14 @@
 
             <!-- App Links: dare.co.zw URLs open directly in this app instead of
                  a browser. Requires a Digital Asset Links file published at
-                 https://dspace.dare.co.zw/.well-known/assetlinks.json for
+                 https://repo.dare.co.zw/.well-known/assetlinks.json for
                  android:autoVerify to pass — see mobile/dare-android/README.md. -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="dspace.dare.co.zw" />
                 <data android:scheme="https" android:host="dare.co.zw" />
-                <data android:scheme="https" android:host="repo.dare.co.zw" />
+                <data android:scheme="https" android:host="*.dare.co.zw" />
             </intent-filter>
         </activity>
 

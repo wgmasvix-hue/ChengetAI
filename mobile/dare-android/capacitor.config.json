@@ -3,14 +3,12 @@
   "appName": "Dare",
   "webDir": "www",
   "server": {
-    "url": "https://dspace.dare.co.zw",
+    "url": "https://repo.dare.co.zw",
     "cleartext": false,
     "errorPath": "offline.html",
     "allowNavigation": [
-      "dspace.dare.co.zw",
       "dare.co.zw",
-      "*.dare.co.zw",
-      "repo.dare.co.zw"
+      "*.dare.co.zw"
     ]
   },
   "android": {

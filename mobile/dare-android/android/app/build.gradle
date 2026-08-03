@@ -16,10 +16,26 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // Release signing: supplied via -P command-line properties (e.g. by CI) so
+    // no keystore or password is ever hard-coded here. Without them, a release
+    // build is simply unsigned (same as stock Android Studio behaviour) and
+    // Android Studio's own "Generate Signed Bundle / APK" wizard still works
+    // as documented in README.md, independently of this block.
+    signingConfigs {
+        release {
+            if (project.hasProperty('RELEASE_STORE_FILE')) {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig project.hasProperty('RELEASE_STORE_FILE') ? signingConfigs.release : null
         }
     }
 }

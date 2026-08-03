@@ -153,8 +153,8 @@
   }
 
   /* Dare repository search — sends the query straight to the live DSpace
-     instance at dspace.dare.co.zw (no backend needed). */
-  var DARE_BASE = "https://dspace.dare.co.zw";
+     instance at repo.dare.co.zw (no backend needed). */
+  var DARE_BASE = "https://repo.dare.co.zw";
   document.querySelectorAll("form[data-dare-search]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
