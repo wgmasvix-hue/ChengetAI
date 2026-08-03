@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Dare — Offline</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; height: 100%;
+    background: linear-gradient(160deg, #0b3d24, #0f5a34 60%, #14733f);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #fff;
+  }
+  .wrap {
+    height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 32px;
+  }
+  .icon { font-size: 3.4rem; margin-bottom: 6px; }
+  h1 { font-size: 1.4rem; margin: 10px 0 6px; }
+  p { color: rgba(255,255,255,0.82); font-size: 0.95rem; max-width: 320px; line-height: 1.5; margin: 0 0 26px; }
+  button {
+    appearance: none; border: none; cursor: pointer;
+    background: linear-gradient(90deg, #22c55e, #eab308);
+    color: #0b1f14; font-weight: 700; font-size: 0.95rem;
+    padding: 13px 28px; border-radius: 999px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  }
+  button:active { transform: scale(0.97); }
+  .brand { position: absolute; bottom: 22px; font-size: 0.72rem; color: rgba(255,255,255,0.55); letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="icon">📡</div>
+    <h1>You're offline</h1>
+    <p>Dare needs a connection to reach the repository. Check your Wi-Fi or mobile data, then try again.</p>
+    <button id="retry-btn">Try Again</button>
+  </div>
+  <div class="brand">Dare · powered by ChengetAI Labs</div>
+  <script>
+    document.getElementById('retry-btn').addEventListener('click', function () {
+      location.href = 'https://repo.dare.co.zw/';
+    });
+  </script>
+</body>
+</html>

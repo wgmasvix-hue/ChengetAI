@@ -1,0 +1,13 @@
+title: ChengetAi Labs
+description: Building Africa's Intelligent Digital Infrastructure — AI, Cloud, Digital Libraries, Education, Research, Agriculture and Enterprise Solutions.
+url: "https://www.chengetailabs.co.zw"
+
+# Static HTML site — no Jekyll theme or plugins needed.
+theme: null
+
+exclude:
+  - examples/
+  - site/
+  - munda333fin.html
+  - README.md
+  - "*.ipynb"
