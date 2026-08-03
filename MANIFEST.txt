@@ -1,18 +1,18 @@
 ChengetAI enterprise website — file manifest
-Generated: 2026-07-28
+Generated: 2026-08-03
 
-index.html                                     25013 bytes
+index.html                                     25129 bytes
 platform.html                                  21247 bytes
 solutions.html                                 25711 bytes
 industries.html                                14215 bytes
 products.html                                  19515 bytes
 library-technology.html                        22718 bytes
-dare.html                                      20287 bytes
+dare.html                                      28507 bytes
 pricing.html                                   16213 bytes
 resources.html                                 17432 bytes
 about.html                                     16265 bytes
 contact.html                                   16137 bytes
-appstore.html                                  24634 bytes
+appstore.html                                  24843 bytes
 studio.html                                    25296 bytes
 cloud.html                                     17688 bytes
 deploy.html                                    17788 bytes
