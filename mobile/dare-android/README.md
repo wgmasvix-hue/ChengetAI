@@ -90,7 +90,12 @@ npm run build:debug      # → android/app/build/outputs/apk/debug/app-debug.apk
 
 ## Release build (signed, for repo.dare.co.zw)
 
-1. Generate a keystore (once — keep it safe, you'll need it for every future update):
+1. Generate a keystore (once — keep it safe, you'll need it for every future update).
+   When prompted for the key password, press **Enter** to reuse the keystore
+   password rather than setting a different one — PKCS12 (the default format
+   on modern JDKs) ties the two together, and a mismatched key password
+   causes a `Given final block not properly padded` error when Gradle later
+   tries to sign with it:
    ```bash
    keytool -genkeypair -v -keystore dare-release.keystore -alias dare \
      -keyalg RSA -keysize 2048 -validity 10000

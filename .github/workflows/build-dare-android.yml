@@ -107,25 +107,30 @@ jobs:
             echo "FRESH_KEYSTORE=false" >> "$GITHUB_ENV"
           else
             echo "No repository secrets configured — generating a NEW keystore for this build."
-            STORE_PW=$(openssl rand -base64 24)
-            KEY_PW=$(openssl rand -base64 24)
-            echo "::add-mask::$STORE_PW"
-            echo "::add-mask::$KEY_PW"
+            # PKCS12 (the JDK 21 default keystore format) ties the store
+            # password and each key's password together - keytool accepts
+            # different values for -storepass/-keypass without erroring, but
+            # the key silently ends up encrypted with the store password,
+            # so reading it back with a separate key password later fails
+            # ("Given final block not properly padded"). Use one password
+            # for both to avoid that.
+            KEYSTORE_PW=$(openssl rand -base64 24)
+            echo "::add-mask::$KEYSTORE_PW"
             keytool -genkeypair -v -keystore dare-release.keystore -alias dare \
               -keyalg RSA -keysize 2048 -validity 10000 \
-              -storepass "$STORE_PW" -keypass "$KEY_PW" \
+              -storepass "$KEYSTORE_PW" -keypass "$KEYSTORE_PW" \
               -dname "CN=ChengetAI Labs, OU=Dare, O=ChengetAI Labs, L=Harare, C=ZW"
-            echo "STORE_PASSWORD=$STORE_PW" >> "$GITHUB_ENV"
+            echo "STORE_PASSWORD=$KEYSTORE_PW" >> "$GITHUB_ENV"
             echo "KEY_ALIAS=dare" >> "$GITHUB_ENV"
-            echo "KEY_PASSWORD=$KEY_PW" >> "$GITHUB_ENV"
+            echo "KEY_PASSWORD=$KEYSTORE_PW" >> "$GITHUB_ENV"
             echo "FRESH_KEYSTORE=true" >> "$GITHUB_ENV"
             {
               echo "New release keystore generated for the Dare Android app."
-              echo "SAVE THIS FILE AND THE PASSWORDS BELOW SOMEWHERE SAFE."
+              echo "SAVE THIS FILE AND THE PASSWORD BELOW SOMEWHERE SAFE."
               echo ""
-              echo "Store password: $STORE_PW"
+              echo "Store password: $KEYSTORE_PW"
               echo "Key alias:      dare"
-              echo "Key password:   $KEY_PW"
+              echo "Key password:   (same as store password)"
               echo ""
               echo "Every future update to this app MUST be signed with this same"
               echo "keystore, or Android will refuse to install it over the existing"
@@ -135,9 +140,9 @@ jobs:
               echo "add these as repository secrets (Settings -> Secrets and variables"
               echo "-> Actions -> New repository secret):"
               echo "  DARE_KEYSTORE_BASE64   = base64 -w0 dare-release.keystore"
-              echo "  DARE_KEYSTORE_PASSWORD = $STORE_PW"
+              echo "  DARE_KEYSTORE_PASSWORD = $KEYSTORE_PW"
               echo "  DARE_KEY_ALIAS         = dare"
-              echo "  DARE_KEY_PASSWORD      = $KEY_PW"
+              echo "  DARE_KEY_PASSWORD      = $KEYSTORE_PW"
             } > dare-release-keystore-INFO.txt
           fi
 
