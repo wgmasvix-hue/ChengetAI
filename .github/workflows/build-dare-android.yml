@@ -46,6 +46,26 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mobile/dare-android/package-lock.json
+
+      - name: Install npm dependencies
+        working-directory: mobile/dare-android
+        run: npm ci
+
+      # capacitor-cordova-android-plugins/ is gitignored by Capacitor's own
+      # template (it's a generated module, not source) - `cap sync` rebuilds
+      # it, along with assets/public and capacitor.config.json, from
+      # node_modules. Without this the Gradle build fails looking for
+      # android/capacitor-cordova-android-plugins/cordova.variables.gradle.
+      - name: Capacitor sync
+        working-directory: mobile/dare-android
+        run: npx cap sync android
+
       - name: Grant execute permission for gradlew
         working-directory: mobile/dare-android/android
         run: chmod +x ./gradlew
