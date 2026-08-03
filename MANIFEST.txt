@@ -7,7 +7,7 @@ solutions.html                                 25711 bytes
 industries.html                                14215 bytes
 products.html                                  19515 bytes
 library-technology.html                        22718 bytes
-dare.html                                      28507 bytes
+dare.html                                      28597 bytes
 pricing.html                                   16213 bytes
 resources.html                                 17432 bytes
 about.html                                     16265 bytes

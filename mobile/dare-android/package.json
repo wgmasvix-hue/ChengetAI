@@ -1,0 +1,29 @@
+{
+  "name": "dare-android",
+  "version": "1.0.0",
+  "description": "Dare Digital Repository — native Android app (Capacitor) wrapping dspace.dare.co.zw",
+  "main": "index.js",
+  "scripts": {
+    "sync": "cap sync android",
+    "open": "cap open android",
+    "assets": "capacitor-assets generate --android",
+    "build:debug": "cd android && ./gradlew assembleDebug",
+    "build:release": "cd android && ./gradlew assembleRelease",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["dare", "dspace", "chengetai", "repository"],
+  "author": "ChengetAI Labs",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/app": "^8.1.1",
+    "@capacitor/cli": "^8.5.0",
+    "@capacitor/core": "^8.5.0",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.3"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5"
+  }
+}

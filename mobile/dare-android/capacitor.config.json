@@ -1,0 +1,36 @@
+{
+  "appId": "zw.co.chengetailabs.dare",
+  "appName": "Dare",
+  "webDir": "www",
+  "server": {
+    "url": "https://dspace.dare.co.zw",
+    "cleartext": false,
+    "errorPath": "offline.html",
+    "allowNavigation": [
+      "dspace.dare.co.zw",
+      "dare.co.zw",
+      "*.dare.co.zw",
+      "repo.dare.co.zw"
+    ]
+  },
+  "android": {
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1200,
+      "launchAutoHide": true,
+      "backgroundColor": "#0f5a34",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": true,
+      "spinnerColor": "#ffffff",
+      "splashFullScreen": true,
+      "splashImmersive": true
+    },
+    "StatusBar": {
+      "backgroundColor": "#0f5a34",
+      "style": "DARK"
+    }
+  }
+}
