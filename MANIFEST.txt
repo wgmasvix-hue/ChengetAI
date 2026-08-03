@@ -1,18 +1,18 @@
 ChengetAI enterprise website — file manifest
 Generated: 2026-08-03
 
-index.html                                     25366 bytes
+index.html                                     25365 bytes
 platform.html                                  21247 bytes
 solutions.html                                 25711 bytes
 industries.html                                14215 bytes
 products.html                                  19509 bytes
 library-technology.html                        22718 bytes
-dare.html                                      30228 bytes
+dare.html                                      30324 bytes
 pricing.html                                   16213 bytes
 resources.html                                 17432 bytes
 about.html                                     16265 bytes
 contact.html                                   16137 bytes
-appstore.html                                  24843 bytes
+appstore.html                                  24842 bytes
 studio.html                                    25296 bytes
 cloud.html                                     17688 bytes
 deploy.html                                    17788 bytes
@@ -23,10 +23,11 @@ admin.html                                     13763 bytes
 404.html                                         908 bytes
 privacy.html                                   12408 bytes
 terms.html                                     12421 bytes
-.htaccess                                       1315 bytes
+.htaccess                                       1370 bytes
 DEPLOY-WEBZIM.md                                8686 bytes
 assets/css/fonts.css                             574 bytes
 assets/css/style.css                           37918 bytes
+assets/downloads/dare-release.apk            4061427 bytes
 assets/fonts/Inter-var.woff2                   48256 bytes
 assets/fonts/JetBrainsMono-var.woff2           31432 bytes
 assets/fonts/Sora-var.woff2                    25284 bytes

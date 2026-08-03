@@ -7,6 +7,7 @@ AddDefaultCharset UTF-8
 <IfModule mod_mime.c>
   AddType font/woff2 .woff2
   AddType image/svg+xml .svg
+  AddType application/vnd.android.package-archive .apk
 </IfModule>
 
 # Don't expose directory listings
